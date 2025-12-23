@@ -1,29 +1,26 @@
-﻿using GHelper.UI;
+﻿namespace GHelper.UI;
+
 using System.Drawing.Drawing2D;
 
 public static class ControlHelper
 {
-
     static bool _invert = false;
     static float _scale = 1;
 
     public static void Adjust(RForm container, bool invert = false)
     {
-
         container.BackColor = RForm.formBack;
         container.ForeColor = RForm.foreMain;
 
         _invert = invert;
         AdjustControls(container.Controls);
         _invert = false;
-
     }
 
     public static void Resize(RForm container, float baseScale = 2)
     {
         _scale = GetDpiScale(container).Value / baseScale;
         if (Math.Abs(_scale - 1) > 0.2) ResizeControls(container.Controls);
-
     }
 
     private static void ResizeControls(Control.ControlCollection controls)
@@ -35,10 +32,10 @@ public static class ControlHelper
                 button.Image = ResizeImage(button.Image);
 
             /*
-            var pictureBox = control as PictureBox;
-            if (pictureBox != null && pictureBox.BackgroundImage is not null)
-                pictureBox.BackgroundImage = ResizeImage(pictureBox.BackgroundImage);
-            */
+        var pictureBox = control as PictureBox;
+        if (pictureBox != null && pictureBox.BackgroundImage is not null)
+            pictureBox.BackgroundImage = ResizeImage(pictureBox.BackgroundImage);
+        */
 
             ResizeControls(control.Controls);
         }
@@ -49,7 +46,6 @@ public static class ControlHelper
     {
         foreach (Control control in controls)
         {
-
             AdjustControls(control.Controls);
 
             var button = control as RButton;
@@ -79,8 +75,9 @@ public static class ControlHelper
                 combo.ButtonColor = RForm.buttonMain;
                 combo.ArrowColor = RForm.foreMain;
             }
+
             var numbericUpDown = control as NumericUpDown;
-            if(numbericUpDown is not null)
+            if (numbericUpDown is not null)
             {
                 numbericUpDown.ForeColor = RForm.foreMain;
                 numbericUpDown.BackColor = RForm.buttonMain;
@@ -109,7 +106,6 @@ public static class ControlHelper
             {
                 chk.BackColor = RForm.buttonSecond;
             }
-
         }
     }
 
@@ -132,6 +128,7 @@ public static class ControlHelper
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(image, new Rectangle(new Point(), newSize));
         }
+
         return pic;
     }
 
@@ -152,7 +149,6 @@ public static class ControlHelper
         }
 
         return pic;
-
     }
 
     public static Image TintImage(Image image, Color tintColor)
@@ -167,8 +163,7 @@ public static class ControlHelper
                 pic.SetPixel(x, y, Color.FromArgb(col.A, tintColor.R, tintColor.G, tintColor.B));
             }
         }
-        
+
         return pic;
     }
-
 }

@@ -10,10 +10,9 @@ using static NativeMethods;
 
 namespace GHelper
 {
-
     static class Program
     {
-        public static NotifyIcon trayIcon;
+        public static NotifyIcon? trayIcon;
 
         public static SettingsForm settingsForm = new SettingsForm();
 
@@ -28,7 +27,6 @@ namespace GHelper
         // The main entry point for the application
         public static void Main(string[] args)
         {
-
             string action = "";
             if (args.Length > 0) action = args[0];
 
@@ -47,12 +45,14 @@ namespace GHelper
             ProcessHelper.SetPriority();
 
             Logger.WriteLine("------------");
-            Logger.WriteLine("App launched: " + AppConfig.GetModel() + " :" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + CultureInfo.CurrentUICulture + (ProcessHelper.IsUserAdministrator() ? "." : ""));
+            Logger.WriteLine("App launched: " + AppConfig.GetModel() + " :" +
+                             Assembly.GetExecutingAssembly().GetName().Version.ToString() +
+                             CultureInfo.CurrentUICulture + (ProcessHelper.IsUserAdministrator() ? "." : ""));
 
             var startCount = AppConfig.Get("start_count") + 1;
             AppConfig.Set("start_count", startCount);
             Logger.WriteLine("Start Count: " + startCount);
-            
+
 
             ProcessHelper.KillByName("ASUSSmartDisplayControl");
 
@@ -78,8 +78,10 @@ namespace GHelper
             SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
 
             // Subscribing for monitor power on events
-            unRegPowerNotify = NativeMethods.RegisterPowerSettingNotification(settingsForm.Handle, PowerSettingGuid.ConsoleDisplayState, NativeMethods.DEVICE_NOTIFY_WINDOW_HANDLE);
-            unRegPowerNotifyLid = NativeMethods.RegisterPowerSettingNotification(settingsForm.Handle, PowerSettingGuid.LIDSWITCH_STATE_CHANGE, NativeMethods.DEVICE_NOTIFY_WINDOW_HANDLE);
+            unRegPowerNotify = NativeMethods.RegisterPowerSettingNotification(settingsForm.Handle,
+                PowerSettingGuid.ConsoleDisplayState, NativeMethods.DEVICE_NOTIFY_WINDOW_HANDLE);
+            unRegPowerNotifyLid = NativeMethods.RegisterPowerSettingNotification(settingsForm.Handle,
+                PowerSettingGuid.LIDSWITCH_STATE_CHANGE, NativeMethods.DEVICE_NOTIFY_WINDOW_HANDLE);
 
 
             Task task = Task.Run((Action)PeripheralsProvider.DetectAllAsusMice);
@@ -98,11 +100,10 @@ namespace GHelper
             }
 
             Application.Run();
-
         }
+
         static void SystemEvents_UserPreferenceChanged(object sender, UserPreferenceChangedEventArgs e)
         {
-
             if (Math.Abs(DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastTheme) < 2000) return;
 
             switch (e.Category)
@@ -120,6 +121,7 @@ namespace GHelper
                     break;
             }
         }
+
         public static bool SetAutoModes(bool powerChanged = false, bool init = false, bool wakeup = false)
         {
             int skipDelay = wakeup ? 10000 : 3000;
@@ -169,7 +171,6 @@ namespace GHelper
         {
             if (e.Button == MouseButtons.Left)
                 SettingsToggle(trayClick: true);
-
         }
 
         static void TrayIcon_MouseMove(object? sender, MouseEventArgs e)
@@ -190,6 +191,5 @@ namespace GHelper
             NativeMethods.UnregisterPowerSettingNotification(unRegPowerNotifyLid);
             Application.Exit();
         }
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using HidSharp;
+﻿using GHelper.Helpers;
+using HidSharp;
 using HidSharp.Reports;
 
 namespace GHelper.USB;

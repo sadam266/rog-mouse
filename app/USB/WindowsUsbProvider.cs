@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using GHelper.Helpers;
 using HidSharp;
 
 namespace GHelper.USB

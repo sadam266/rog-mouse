@@ -5,7 +5,6 @@ namespace GHelper.UI
 {
     public class IconHelper
     {
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
@@ -18,7 +17,8 @@ namespace GHelper.UI
         {
             try
             {
-                SendMessage(form.Handle, WM_SETICON, ICON_BIG, Icon.ExtractAssociatedIcon(Application.ExecutablePath)!.Handle);
+                SendMessage(form.Handle, WM_SETICON, ICON_BIG,
+                    Icon.ExtractAssociatedIcon(Application.ExecutablePath)!.Handle);
                 SendMessage(form.Handle, WM_SETICON, ICON_SMALL, icon.GetHicon());
             }
             catch (Exception ex)
@@ -26,6 +26,5 @@ namespace GHelper.UI
                 Debug.WriteLine($"Error setting icon {ex.Message}");
             }
         }
-
     }
 }

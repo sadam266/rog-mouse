@@ -32,67 +32,12 @@ namespace GHelper
         {
             InitializeComponent();
             InitTheme(true);
-
-            buttonSilent.Text = Properties.Strings.Silent;
-            buttonBalanced.Text = Properties.Strings.Balanced;
-            buttonTurbo.Text = Properties.Strings.Turbo;
-            buttonFans.Text = Properties.Strings.FansPower;
-
-            buttonEco.Text = Properties.Strings.EcoMode;
-            buttonUltimate.Text = Properties.Strings.UltimateMode;
-            buttonStandard.Text = Properties.Strings.StandardMode;
-            buttonOptimized.Text = Properties.Strings.Optimized;
-            buttonStopGPU.Text = Properties.Strings.StopGPUApps;
-
-            buttonScreenAuto.Text = Properties.Strings.AutoMode;
-            buttonMiniled.Text = Properties.Strings.Multizone;
-
-            buttonKeyboardColor.Text = Properties.Strings.Color;
-            buttonKeyboard.Text = Properties.Strings.Extra;
-
-            labelPerf.Text = Properties.Strings.PerformanceMode;
-            labelGPU.Text = Properties.Strings.GPUMode;
-            labelSreen.Text = Properties.Strings.LaptopScreen;
-            labelKeyboard.Text = Properties.Strings.LaptopKeyboard;
-            labelMatrix.Text = Properties.Strings.AnimeMatrix;
-            labelBatteryTitle.Text = Properties.Strings.BatteryChargeLimit;
-
-            checkMatrix.Text = Properties.Strings.TurnOffOnBattery;
-            checkMatrixLid.Text = Properties.Strings.DisableOnLidClose;
             checkStartup.Text = Properties.Strings.RunOnStartup;
 
-            buttonMatrix.Text = Properties.Strings.PictureGif;
             buttonQuit.Text = Properties.Strings.Quit;
-            buttonUpdates.Text = Properties.Strings.Updates;
-            buttonDonate.Text = Properties.Strings.Donate;
-
-            buttonController.Text = Properties.Strings.Controller;
-            labelAlly.Text = Properties.Strings.AllyController;
 
             // Accessible Labels
-
-            panelMatrix.AccessibleName = Properties.Strings.AnimeMatrix;
-            sliderBattery.AccessibleName = Properties.Strings.BatteryChargeLimit;
             buttonQuit.AccessibleName = Properties.Strings.Quit;
-            buttonUpdates.AccessibleName = Properties.Strings.BiosAndDriverUpdates;
-            panelPerformance.AccessibleName = Properties.Strings.PerformanceMode;
-            buttonSilent.AccessibleName = Properties.Strings.Silent;
-            buttonBalanced.AccessibleName = Properties.Strings.Balanced;
-            buttonTurbo.AccessibleName = Properties.Strings.Turbo;
-            buttonFans.AccessibleName = Properties.Strings.FansAndPower;
-            panelGPU.AccessibleName = Properties.Strings.GPUMode;
-            buttonEco.AccessibleName = Properties.Strings.EcoMode;
-            buttonStandard.AccessibleName = Properties.Strings.StandardMode;
-            buttonOptimized.AccessibleName = Properties.Strings.Optimized;
-            buttonUltimate.AccessibleName = Properties.Strings.UltimateMode;
-            panelScreen.AccessibleName = Properties.Strings.LaptopScreen;
-
-            buttonScreenAuto.AccessibleName = Properties.Strings.AutoMode;
-
-            panelKeyboard.AccessibleName = Properties.Strings.LaptopKeyboard;
-            buttonKeyboard.AccessibleName = Properties.Strings.ExtraSettings;
-            buttonKeyboardColor.AccessibleName = Properties.Strings.LaptopKeyboard + " " + Properties.Strings.Color;
-            comboKeyboard.AccessibleName = Properties.Strings.LaptopBacklight;
 
             FormClosing += SettingsForm_FormClosing;
             Deactivate += SettingsForm_LostFocus;
@@ -109,21 +54,15 @@ namespace GHelper
             sensorTimer.Elapsed += OnTimedEvent;
             sensorTimer.Enabled = true;
 
-            buttonPeripheral1.Click += ButtonPeripheral_Click;
-            buttonPeripheral2.Click += ButtonPeripheral_Click;
-            buttonPeripheral3.Click += ButtonPeripheral_Click;
+            buttonPeripheral.Click += ButtonPeripheral_Click;
 
-            buttonPeripheral1.MouseEnter += ButtonPeripheral_MouseEnter;
-            buttonPeripheral2.MouseEnter += ButtonPeripheral_MouseEnter;
-            buttonPeripheral3.MouseEnter += ButtonPeripheral_MouseEnter;
+            buttonPeripheral.MouseEnter += ButtonPeripheral_MouseEnter;
 
-            Text = "G-Helper " + (ProcessHelper.IsUserAdministrator() ? "—" : "-") + " " + AppConfig.GetModelShort();
+            Text = "";
             TopMost = AppConfig.Is("topmost");
 
             //This will auto position the window again when it resizes. Might mess with position if people drag the window somewhere else.
             this.Resize += SettingsForm_Resize;
-
-            panelPerformance.Focus();
         }
 
         private void SettingsForm_Focused(object? sender, EventArgs e)
@@ -190,12 +129,12 @@ namespace GHelper
             contextMenuStrip.ShowImageMargin = false;
             Padding padding = new Padding(15, 5, 5, 5);
 
-            var title = new ToolStripMenuItem(Properties.Strings.PerformanceMode);
-            title.Margin = padding;
-            title.Enabled = false;
-            contextMenuStrip.Items.Add(title);
-
-            contextMenuStrip.Items.Add("-");
+            // var title = new ToolStripMenuItem("");
+            // title.Margin = padding;
+            // title.Enabled = false;
+            // contextMenuStrip.Items.Add(title);
+            //
+            // contextMenuStrip.Items.Add("-");
 
 
             var quit = new ToolStripMenuItem(Properties.Strings.Quit);
@@ -234,7 +173,7 @@ namespace GHelper
         private void ButtonQuit_Click(object? sender, EventArgs e)
         {
             Close();
-            Program.trayIcon.Visible = false;
+            if (Program.trayIcon != null) Program.trayIcon.Visible = false;
             Application.Exit();
         }
 
@@ -269,11 +208,9 @@ namespace GHelper
 
         private void SettingsForm_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true;
-                HideAll();
-            }
+            if (e.CloseReason != CloseReason.UserClosing) return;
+            e.Cancel = true;
+            HideAll();
         }
 
         public async void RefreshSensors(bool force = false)
@@ -305,9 +242,8 @@ namespace GHelper
                 return;
             }
 
-            Button[] buttons = new Button[] { buttonPeripheral1, buttonPeripheral2, buttonPeripheral3 };
-
-            //we only support 4 devces for now. Who has more than 4 mice connected to the same PC anyways....
+            Button[] buttons = [buttonPeripheral];
+            
             List<IPeripheral> lp = PeripheralsProvider.AllPeripherals();
 
             for (int i = 0; i < lp.Count && i < buttons.Length; ++i)
@@ -333,16 +269,12 @@ namespace GHelper
                     b.Text = m.GetDisplayName() + "\n(" + Properties.Strings.NotConnected + ")";
                 }
 
-                switch (m.DeviceType())
+                b.Image = m.DeviceType() switch
                 {
-                    case PeripheralType.Mouse:
-                        b.Image = ControlHelper.TintImage(Properties.Resources.icons8_maus_32, b.ForeColor);
-                        break;
-
-                    case PeripheralType.Keyboard:
-                        b.Image = ControlHelper.TintImage(Properties.Resources.icons8_keyboard_32, b.ForeColor);
-                        break;
-                }
+                    PeripheralType.Mouse => ControlHelper.TintImage(Properties.Resources.icons8_maus_32, b.ForeColor),
+                    PeripheralType.Keyboard => ControlHelper.TintImage(Properties.Resources.icons8_keyboard_32, b.ForeColor),
+                    _ => b.Image
+                };
 
                 b.Visible = true;
             }
@@ -357,11 +289,7 @@ namespace GHelper
 
         private void ButtonPeripheral_MouseEnter(object? sender, EventArgs e)
         {
-            int index = 0;
-            if (sender == buttonPeripheral2) index = 1;
-            if (sender == buttonPeripheral3) index = 2;
-            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
-
+            IPeripheral? iph = PeripheralsProvider.AllPeripherals().FirstOrDefault();
 
             if (iph is null)
             {
@@ -383,11 +311,7 @@ namespace GHelper
                 return;
             }
 
-            int index = 0;
-            if (sender == buttonPeripheral2) index = 1;
-            if (sender == buttonPeripheral3) index = 2;
-
-            IPeripheral iph = PeripheralsProvider.AllPeripherals().ElementAt(index);
+            IPeripheral? iph = PeripheralsProvider.AllPeripherals().FirstOrDefault();
 
             if (iph is null)
             {

@@ -1,4 +1,6 @@
 ﻿
+using GHelper.Helpers;
+
 namespace GHelper.Peripherals.Mouse.Models
 {
     //P705

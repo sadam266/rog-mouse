@@ -1,9 +1,9 @@
 ﻿using System.Management;
 using System.Text.Json;
+using GHelper.Helpers;
 
 public static class AppConfig
 {
-
     private static string configFile;
 
     private static string? _model;
@@ -16,7 +16,6 @@ public static class AppConfig
 
     static AppConfig()
     {
-
         string startupPath = Application.StartupPath.Trim('\\');
         string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GHelper";
         string configName = "\\config.json";
@@ -64,12 +63,10 @@ public static class AppConfig
         }
 
         timer.Elapsed += Timer_Elapsed;
-
     }
 
     private static void Timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
     {
-
         timer.Stop();
         string jsonString = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
         var backup = configFile + ".bak";
@@ -90,6 +87,7 @@ public static class AppConfig
             {
                 Logger.WriteLine(ex.Message);
             }
+
             return;
         }
 
@@ -102,7 +100,7 @@ public static class AppConfig
         var backupText = File.ReadAllText(configFile);
         bool isValid =
             !string.IsNullOrWhiteSpace(backupText) &&
-            backupText.IndexOf('\0') == -1 &&                     
+            backupText.IndexOf('\0') == -1 &&
             backupText.StartsWith("{") &&
             backupText.Trim().EndsWith("}") &&
             backupText.Length >= 10;
@@ -116,7 +114,6 @@ public static class AppConfig
         {
             Logger.WriteLine("Error writing config");
         }
-
     }
 
     public static string GetModel()
@@ -248,11 +245,13 @@ public static class AppConfig
         config[name] = value;
         Write();
     }
+
     public static void Remove(string name)
     {
         config.Remove(name);
         Write();
     }
+
     public static byte[] StringToBytes(string str)
     {
         String[] arr = str.Split('-');
@@ -260,18 +259,22 @@ public static class AppConfig
         for (int i = 0; i < arr.Length; i++) array[i] = Convert.ToByte(arr[i], 16);
         return array;
     }
+
     public static bool IsNoOverdrive()
     {
         return Is("no_overdrive");
     }
+
     public static bool IsNVPlatform()
     {
         return Is("nv_platform");
     }
+
     public static bool IsBWIcon()
     {
         return Is("bw_icon");
     }
+
     public static bool SaveDimming()
     {
         return Is("save_dimming");

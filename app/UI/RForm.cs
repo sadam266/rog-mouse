@@ -5,7 +5,6 @@ namespace GHelper.UI
 {
     public class RForm : Form
     {
-
         public static Color colorEco = Color.FromArgb(255, 6, 180, 138);
         public static Color colorStandard = Color.FromArgb(255, 58, 174, 239);
         public static Color colorTurbo = Color.FromArgb(255, 255, 32, 32);
@@ -29,16 +28,18 @@ namespace GHelper.UI
         private static extern int DwmSetWindowAttribute(nint hwnd, int attr, int[] attrValue, int attrSize);
 
         public bool darkTheme = false;
+
         protected override CreateParams CreateParams
         {
             get
             {
                 var parms = base.CreateParams;
-                parms.Style &= ~0x02000000;  // Turn off WS_CLIPCHILDREN
+                parms.Style &= ~0x02000000; // Turn off WS_CLIPCHILDREN
                 parms.ClassStyle &= ~0x00020000;
                 return parms;
             }
         }
+
         public static void InitColors(bool darkTheme)
         {
             if (darkTheme)
@@ -86,7 +87,8 @@ namespace GHelper.UI
                 return CheckSystemDarkModeStatus();
             }
 
-            using var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
+            using var key =
+                Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize");
             var registryValueObject = key?.GetValue("AppsUseLightTheme");
 
             if (registryValueObject == null) return false;
@@ -113,8 +115,6 @@ namespace GHelper.UI
 
 
             return changed;
-
         }
-
     }
 }

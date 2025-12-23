@@ -4,6 +4,7 @@ using HidSharp;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using GHelper.Helpers;
 
 namespace GHelper.Peripherals
 {
@@ -51,6 +52,7 @@ namespace GHelper.Peripherals
             {
                 l.AddRange(ConnectedMice);
             }
+
             return l;
         }
 
@@ -90,6 +92,7 @@ namespace GHelper.Peripherals
                 am.BatteryUpdated -= BatteryUpdated;
                 ConnectedMice.Remove(am);
             }
+
             if (DeviceChanged is not null)
             {
                 DeviceChanged(am, EventArgs.Empty);
@@ -98,7 +101,6 @@ namespace GHelper.Peripherals
 
         public static void Connect(AsusMouse am)
         {
-
             if (IsDeviceConnected(am))
             {
                 //Mouse already connected;
@@ -131,7 +133,9 @@ namespace GHelper.Peripherals
             {
                 ConnectedMice.Add(am);
             }
-            Logger.WriteLine(am.GetDisplayName() + " added to the list: " + ConnectedMice.Count + " device are conneted.");
+
+            Logger.WriteLine(am.GetDisplayName() + " added to the list: " + ConnectedMice.Count +
+                             " device are conneted.");
 
 
             am.Disconnect += Mouse_Disconnect;
@@ -141,6 +145,7 @@ namespace GHelper.Peripherals
             {
                 DeviceChanged(am, EventArgs.Empty);
             }
+
             UpdateSettingsView();
         }
 
@@ -167,7 +172,8 @@ namespace GHelper.Peripherals
                 ConnectedMice.Remove(am);
             }
 
-            Logger.WriteLine(am.GetDisplayName() + " reported disconnect. " + ConnectedMice.Count + " device are conneted.");
+            Logger.WriteLine(am.GetDisplayName() + " reported disconnect. " + ConnectedMice.Count +
+                             " device are conneted.");
             am.Dispose();
 
             UpdateSettingsView();
@@ -176,10 +182,7 @@ namespace GHelper.Peripherals
 
         private static void UpdateSettingsView()
         {
-            Program.settingsForm.Invoke(delegate
-            {
-                Program.settingsForm.VisualizePeripherals();
-            });
+            Program.settingsForm.Invoke(delegate { Program.settingsForm.VisualizePeripherals(); });
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -220,7 +223,7 @@ namespace GHelper.Peripherals
             DetectMouse(new KerisWirelssAimpoint());
             DetectMouse(new KerisWirelssAimpointWired());
             DetectMouse(new KerisIIAceWired());
-            DetectMouse(new KerisIIOriginWired()); 
+            DetectMouse(new KerisIIOriginWired());
             DetectMouse(new PugioII());
             DetectMouse(new PugioIIWired());
             DetectMouse(new StrixImpactII());
@@ -242,7 +245,8 @@ namespace GHelper.Peripherals
         {
             try
             {
-                var device = DeviceList.Local.GetHidDevices(0x0B05, 0x1ACE).FirstOrDefault(x => x.DevicePath.Contains("mi_02&col03"));
+                var device = DeviceList.Local.GetHidDevices(0x0B05, 0x1ACE)
+                    .FirstOrDefault(x => x.DevicePath.Contains("mi_02&col03"));
                 if (device is null) return;
 
                 var config = new OpenConfiguration();
@@ -264,25 +268,25 @@ namespace GHelper.Peripherals
 
                     AsusMouse omniMouse = signatureStr switch
                     {
-                        var s when s.StartsWith("B23") => new HarpeAceAimLabEditionOmni(),              // B23072800062
-                        var s when s.StartsWith("B241") => new HarpeAceAimLabEditionOmni(),             // B24122666771
-                        var s when s.StartsWith("B2501") => new HarpeAceAimLabEditionOmni(),            // B25010476524
-                        var s when s.StartsWith("B24") => new HarpeAceMiniOmni(),                       // B24082550833
-                        var s when s.StartsWith("B25") => new HarpeAceMiniOmni(),                       // B25030817186
-                        var s when s.StartsWith("R1") => new KerisWirelssAimpointOmni(),                // R13121351391
-                        var s when s.StartsWith("F24") => new KerisWirelssAimpointOmni(),               // F24B21DD03F4
-                        var s when s.StartsWith("FB") => new KerisWirelssAimpointOmni(),                // FBA0CC1D6F9C
-                        var s when s.StartsWith("024") => new KerisAceIIOmni(),                         // 024031316969
-                        var s when s.StartsWith("02501") => new KerisAceIIOmni(),                       // 0250105027981
-                        var s when s.StartsWith("025") => new KerisIIOriginOmni(),                      // 025050613700
-                        var s when s.StartsWith("20") => new StrixImpactIIIWirelessOmni(),              // 202405290700
-                        var s when s.StartsWith("R8") => new GladiusIIIAimpointOmni(),                  // R82020155689
-                        var s when s.StartsWith("R6") => new GladiusIIIAimpointOmni(),                  // R60120331787
-                        var s when s.StartsWith("RC") => new GladiusIIIAimpointOmni(),                  // RC1519430455
-                        var s when s.StartsWith("R903") => new GladiusIIIAimpointOmni(),                // R90319215881
-                        var s when s.StartsWith("R923") => new GladiusIIIAimpointOmni(),                // R92307410710
-                        var s when s.StartsWith("R9") => new KerisWirelssAimpointOmni(),                // R90518300572
-                        var s when s.StartsWith("T5") => new HarpeAceExtremeOmni(),                      // T5MPKR018406
+                        var s when s.StartsWith("B23") => new HarpeAceAimLabEditionOmni(), // B23072800062
+                        var s when s.StartsWith("B241") => new HarpeAceAimLabEditionOmni(), // B24122666771
+                        var s when s.StartsWith("B2501") => new HarpeAceAimLabEditionOmni(), // B25010476524
+                        var s when s.StartsWith("B24") => new HarpeAceMiniOmni(), // B24082550833
+                        var s when s.StartsWith("B25") => new HarpeAceMiniOmni(), // B25030817186
+                        var s when s.StartsWith("R1") => new KerisWirelssAimpointOmni(), // R13121351391
+                        var s when s.StartsWith("F24") => new KerisWirelssAimpointOmni(), // F24B21DD03F4
+                        var s when s.StartsWith("FB") => new KerisWirelssAimpointOmni(), // FBA0CC1D6F9C
+                        var s when s.StartsWith("024") => new KerisAceIIOmni(), // 024031316969
+                        var s when s.StartsWith("02501") => new KerisAceIIOmni(), // 0250105027981
+                        var s when s.StartsWith("025") => new KerisIIOriginOmni(), // 025050613700
+                        var s when s.StartsWith("20") => new StrixImpactIIIWirelessOmni(), // 202405290700
+                        var s when s.StartsWith("R8") => new GladiusIIIAimpointOmni(), // R82020155689
+                        var s when s.StartsWith("R6") => new GladiusIIIAimpointOmni(), // R60120331787
+                        var s when s.StartsWith("RC") => new GladiusIIIAimpointOmni(), // RC1519430455
+                        var s when s.StartsWith("R903") => new GladiusIIIAimpointOmni(), // R90319215881
+                        var s when s.StartsWith("R923") => new GladiusIIIAimpointOmni(), // R92307410710
+                        var s when s.StartsWith("R9") => new KerisWirelssAimpointOmni(), // R90518300572
+                        var s when s.StartsWith("T5") => new HarpeAceExtremeOmni(), // T5MPKR018406
                         _ => new HarpeAceAimLabEditionOmni()
                     };
 
