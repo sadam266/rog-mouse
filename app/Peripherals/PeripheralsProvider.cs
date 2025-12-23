@@ -176,10 +176,19 @@ namespace GHelper.Peripherals
 
         private static void UpdateSettingsView()
         {
-            Program.settingsForm.Invoke(delegate
+            if (Program.settingsForm == null || Program.settingsForm.IsDisposed) return;
+
+            if (Program.settingsForm.InvokeRequired)
+            {
+                Program.settingsForm.Invoke(delegate
+                {
+                    Program.settingsForm.VisualizePeripherals();
+                });
+            }
+            else
             {
                 Program.settingsForm.VisualizePeripherals();
-            });
+            }
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -324,7 +333,6 @@ namespace GHelper.Peripherals
             timer.Stop();
             Logger.WriteLine("HID Device Event: Checking for new ASUS Mice");
             DetectAllAsusMice();
-            if (AppConfig.IsZ13()) Program.inputDispatcher.Init();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using GHelper.AnimeMatrix.Communication;
-using GHelper.AnimeMatrix.Communication.Platform;
+﻿using GHelper.USB;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -211,6 +210,9 @@ namespace GHelper.Peripherals.Mouse
         public event EventHandler? MouseReadyChanged;
 
         private readonly string path;
+
+        public new ushort VendorID() => _vendorId;
+        public new ushort ProductID() => _productId;
 
         protected byte reportId = 0x00;
 

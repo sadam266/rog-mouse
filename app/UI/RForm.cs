@@ -107,7 +107,7 @@ namespace GHelper.UI
             if (changed)
             {
                 DwmSetWindowAttribute(Handle, 20, new[] { darkTheme ? 1 : 0 }, 4);
-                ControlHelper.Adjust(this, changed);
+                ControlHelper.ApplyTheme(this);
                 this.Invalidate();
             }
 

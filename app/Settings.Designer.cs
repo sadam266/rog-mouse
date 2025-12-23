@@ -30,6 +30,9 @@ namespace GHelper
         /// </summary>
         private void InitializeComponent()
         {
+            panelPeripheralsTitle = new Panel();
+            picturePeripherals = new PictureBox();
+            labelPeripherals = new Label();
             panelMatrix = new Panel();
             panelMatrixAuto = new Panel();
             checkMatrixLid = new CheckBox();
@@ -51,9 +54,7 @@ namespace GHelper
             labelBatteryTitle = new Label();
             panelFooter = new Panel();
             tableButtons = new TableLayoutPanel();
-            buttonDonate = new RBadgeButton();
             buttonQuit = new RButton();
-            buttonUpdates = new RButton();
             checkStartup = new CheckBox();
             panelPerformance = new Panel();
             tablePerf = new TableLayoutPanel();
@@ -171,6 +172,8 @@ namespace GHelper
             panelStartup.SuspendLayout();
             panelPeripherals.SuspendLayout();
             tableLayoutPeripherals.SuspendLayout();
+            panelPeripheralsTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picturePeripherals).BeginInit();
             panelAlly.SuspendLayout();
             tableLayoutAlly.SuspendLayout();
             panelAllyTitle.SuspendLayout();
@@ -462,7 +465,7 @@ namespace GHelper
             panelFooter.AutoSize = true;
             panelFooter.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panelFooter.Controls.Add(tableButtons);
-            panelFooter.Dock = DockStyle.Top;
+            panelFooter.Dock = DockStyle.Bottom;
             panelFooter.Location = new Point(11, 1887);
             panelFooter.Margin = new Padding(0);
             panelFooter.Name = "panelFooter";
@@ -473,14 +476,9 @@ namespace GHelper
             // tableButtons
             // 
             tableButtons.AutoSize = true;
-            tableButtons.ColumnCount = 3;
-            tableButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 27F));
-            tableButtons.Controls.Add(buttonDonate, 0, 0);
-            tableButtons.Controls.Add(buttonQuit, 2, 0);
-            tableButtons.Controls.Add(buttonUpdates, 1, 0);
+            tableButtons.ColumnCount = 1;
+            tableButtons.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableButtons.Controls.Add(buttonQuit, 0, 0);
             tableButtons.Dock = DockStyle.Top;
             tableButtons.Location = new Point(20, 10);
             tableButtons.Margin = new Padding(8, 4, 8, 4);
@@ -489,27 +487,6 @@ namespace GHelper
             tableButtons.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableButtons.Size = new Size(787, 58);
             tableButtons.TabIndex = 25;
-            // 
-            // buttonDonate
-            // 
-            buttonDonate.Activated = false;
-            buttonDonate.BackColor = SystemColors.ControlLight;
-            buttonDonate.Badge = 0;
-            buttonDonate.BorderColor = Color.Transparent;
-            buttonDonate.BorderRadius = 2;
-            buttonDonate.Dock = DockStyle.Top;
-            buttonDonate.FlatStyle = FlatStyle.Flat;
-            buttonDonate.Image = Properties.Resources.icons8_dollar_32;
-            buttonDonate.ImageAlign = ContentAlignment.MiddleRight;
-            buttonDonate.Location = new Point(4, 5);
-            buttonDonate.Margin = new Padding(4, 5, 4, 5);
-            buttonDonate.Name = "buttonDonate";
-            buttonDonate.Secondary = true;
-            buttonDonate.Size = new Size(254, 48);
-            buttonDonate.TabIndex = 3;
-            buttonDonate.Text = "&Donate";
-            buttonDonate.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonDonate.UseVisualStyleBackColor = false;
             // 
             // buttonQuit
             // 
@@ -520,36 +497,16 @@ namespace GHelper
             buttonQuit.Dock = DockStyle.Top;
             buttonQuit.FlatStyle = FlatStyle.Flat;
             buttonQuit.Image = Properties.Resources.icons8_quit_32;
-            buttonQuit.Location = new Point(528, 5);
+            buttonQuit.Location = new Point(4, 5);
             buttonQuit.Margin = new Padding(4, 5, 4, 5);
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Secondary = true;
-            buttonQuit.Size = new Size(255, 48);
+            buttonQuit.Size = new Size(779, 48);
             buttonQuit.TabIndex = 2;
             buttonQuit.Text = "&Quit";
             buttonQuit.TextAlign = ContentAlignment.MiddleRight;
             buttonQuit.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonQuit.UseVisualStyleBackColor = false;
-            // 
-            // buttonUpdates
-            // 
-            buttonUpdates.Activated = false;
-            buttonUpdates.BackColor = SystemColors.ControlLight;
-            buttonUpdates.BorderColor = Color.Transparent;
-            buttonUpdates.BorderRadius = 2;
-            buttonUpdates.Dock = DockStyle.Top;
-            buttonUpdates.FlatStyle = FlatStyle.Flat;
-            buttonUpdates.Image = Properties.Resources.icons8_software_32_white;
-            buttonUpdates.ImageAlign = ContentAlignment.MiddleRight;
-            buttonUpdates.Location = new Point(266, 5);
-            buttonUpdates.Margin = new Padding(4, 5, 4, 5);
-            buttonUpdates.Name = "buttonUpdates";
-            buttonUpdates.Secondary = true;
-            buttonUpdates.Size = new Size(254, 48);
-            buttonUpdates.TabIndex = 1;
-            buttonUpdates.Text = "&Updates";
-            buttonUpdates.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonUpdates.UseVisualStyleBackColor = false;
             // 
             // checkStartup
             // 
@@ -1482,40 +1439,67 @@ namespace GHelper
             labelCharge.TabIndex = 40;
             labelCharge.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // panelPeripheralsTitle
+            // 
+            panelPeripheralsTitle.Controls.Add(picturePeripherals);
+            panelPeripheralsTitle.Controls.Add(labelPeripherals);
+            panelPeripheralsTitle.Dock = DockStyle.Top;
+            panelPeripheralsTitle.Location = new Point(0, 0);
+            panelPeripheralsTitle.Name = "panelPeripheralsTitle";
+            panelPeripheralsTitle.Size = new Size(827, 40);
+            panelPeripheralsTitle.TabIndex = 42;
+            // 
+            // picturePeripherals
+            // 
+            picturePeripherals.BackgroundImage = Properties.Resources.icons8_maus_48;
+            picturePeripherals.BackgroundImageLayout = ImageLayout.Zoom;
+            picturePeripherals.Location = new Point(0, 0);
+            picturePeripherals.Name = "picturePeripherals";
+            picturePeripherals.Size = new Size(32, 32);
+            picturePeripherals.TabIndex = 38;
+            picturePeripherals.TabStop = false;
+            // 
+            // labelPeripherals
+            // 
+            labelPeripherals.AutoSize = true;
+            labelPeripherals.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            labelPeripherals.Location = new Point(40, 0);
+            labelPeripherals.Name = "labelPeripherals";
+            labelPeripherals.Size = new Size(70, 32);
+            labelPeripherals.TabIndex = 37;
+            labelPeripherals.Text = "Mice";
+            // 
             // panelPeripherals
             // 
             panelPeripherals.AutoSize = true;
             panelPeripherals.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panelPeripherals.Controls.Add(tableLayoutPeripherals);
-            panelPeripherals.Dock = DockStyle.Top;
-            panelPeripherals.Location = new Point(11, 1540);
+            panelPeripherals.Controls.Add(panelPeripheralsTitle);
+            panelPeripherals.Dock = DockStyle.Fill;
+            panelPeripherals.Location = new Point(11, 11);
             panelPeripherals.Margin = new Padding(0);
             panelPeripherals.Name = "panelPeripherals";
-            panelPeripherals.Padding = new Padding(20, 5, 20, 10);
-            panelPeripherals.Size = new Size(827, 143);
-            panelPeripherals.TabIndex = 4;
-            panelPeripherals.Visible = false;
+            panelPeripherals.Padding = new Padding(20, 10, 20, 10);
+            panelPeripherals.Size = new Size(827, 208);
+            panelPeripherals.TabIndex = 6;
+            panelPeripherals.Visible = true;
             // 
             // tableLayoutPeripherals
             // 
             tableLayoutPeripherals.AutoSize = true;
-            tableLayoutPeripherals.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPeripherals.ColumnCount = 3;
-            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPeripherals.Controls.Add(buttonPeripheral3, 0, 0);
-            tableLayoutPeripherals.Controls.Add(buttonPeripheral2, 0, 0);
+            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPeripherals.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33333F));
+            tableLayoutPeripherals.Controls.Add(buttonPeripheral3, 2, 0);
+            tableLayoutPeripherals.Controls.Add(buttonPeripheral2, 1, 0);
             tableLayoutPeripherals.Controls.Add(buttonPeripheral1, 0, 0);
             tableLayoutPeripherals.Dock = DockStyle.Top;
-            tableLayoutPeripherals.Location = new Point(20, 5);
-            tableLayoutPeripherals.Margin = new Padding(8, 4, 8, 4);
+            tableLayoutPeripherals.Location = new Point(20, 50);
             tableLayoutPeripherals.Name = "tableLayoutPeripherals";
             tableLayoutPeripherals.RowCount = 1;
             tableLayoutPeripherals.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPeripherals.Size = new Size(787, 128);
-            tableLayoutPeripherals.TabIndex = 43;
+            tableLayoutPeripherals.TabIndex = 41;
             // 
             // buttonPeripheral3
             // 
@@ -1523,22 +1507,20 @@ namespace GHelper
             buttonPeripheral3.BackColor = SystemColors.ControlLightLight;
             buttonPeripheral3.BorderColor = Color.Transparent;
             buttonPeripheral3.BorderRadius = 5;
-            buttonPeripheral3.CausesValidation = false;
-            buttonPeripheral3.Dock = DockStyle.Top;
+            buttonPeripheral3.Dock = DockStyle.Fill;
             buttonPeripheral3.FlatAppearance.BorderSize = 0;
             buttonPeripheral3.FlatStyle = FlatStyle.Flat;
-            buttonPeripheral3.Font = new Font("Segoe UI", 8F);
             buttonPeripheral3.ForeColor = SystemColors.ControlText;
             buttonPeripheral3.Image = Properties.Resources.icons8_maus_48;
-            buttonPeripheral3.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonPeripheral3.ImageAlign = ContentAlignment.BottomCenter;
             buttonPeripheral3.Location = new Point(528, 4);
             buttonPeripheral3.Margin = new Padding(4);
             buttonPeripheral3.Name = "buttonPeripheral3";
             buttonPeripheral3.Secondary = false;
             buttonPeripheral3.Size = new Size(255, 120);
-            buttonPeripheral3.TabIndex = 22;
-            buttonPeripheral3.Text = "Mouse 3";
-            buttonPeripheral3.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonPeripheral3.TabIndex = 2;
+            buttonPeripheral3.Text = "ROG Harpe Ace";
+            buttonPeripheral3.TextImageRelation = TextImageRelation.ImageAboveText;
             buttonPeripheral3.UseVisualStyleBackColor = false;
             // 
             // buttonPeripheral2
@@ -1547,22 +1529,20 @@ namespace GHelper
             buttonPeripheral2.BackColor = SystemColors.ControlLightLight;
             buttonPeripheral2.BorderColor = Color.Transparent;
             buttonPeripheral2.BorderRadius = 5;
-            buttonPeripheral2.CausesValidation = false;
-            buttonPeripheral2.Dock = DockStyle.Top;
+            buttonPeripheral2.Dock = DockStyle.Fill;
             buttonPeripheral2.FlatAppearance.BorderSize = 0;
             buttonPeripheral2.FlatStyle = FlatStyle.Flat;
-            buttonPeripheral2.Font = new Font("Segoe UI", 8F);
             buttonPeripheral2.ForeColor = SystemColors.ControlText;
             buttonPeripheral2.Image = Properties.Resources.icons8_maus_48;
-            buttonPeripheral2.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonPeripheral2.ImageAlign = ContentAlignment.BottomCenter;
             buttonPeripheral2.Location = new Point(266, 4);
             buttonPeripheral2.Margin = new Padding(4);
             buttonPeripheral2.Name = "buttonPeripheral2";
             buttonPeripheral2.Secondary = false;
             buttonPeripheral2.Size = new Size(254, 120);
-            buttonPeripheral2.TabIndex = 19;
-            buttonPeripheral2.Text = "Mouse 2";
-            buttonPeripheral2.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonPeripheral2.TabIndex = 1;
+            buttonPeripheral2.Text = "ROG Keris";
+            buttonPeripheral2.TextImageRelation = TextImageRelation.ImageAboveText;
             buttonPeripheral2.UseVisualStyleBackColor = false;
             // 
             // buttonPeripheral1
@@ -1571,22 +1551,20 @@ namespace GHelper
             buttonPeripheral1.BackColor = SystemColors.ControlLightLight;
             buttonPeripheral1.BorderColor = Color.Transparent;
             buttonPeripheral1.BorderRadius = 5;
-            buttonPeripheral1.CausesValidation = false;
-            buttonPeripheral1.Dock = DockStyle.Top;
+            buttonPeripheral1.Dock = DockStyle.Fill;
             buttonPeripheral1.FlatAppearance.BorderSize = 0;
             buttonPeripheral1.FlatStyle = FlatStyle.Flat;
-            buttonPeripheral1.Font = new Font("Segoe UI", 8F);
             buttonPeripheral1.ForeColor = SystemColors.ControlText;
             buttonPeripheral1.Image = Properties.Resources.icons8_maus_48;
-            buttonPeripheral1.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonPeripheral1.ImageAlign = ContentAlignment.BottomCenter;
             buttonPeripheral1.Location = new Point(4, 4);
             buttonPeripheral1.Margin = new Padding(4);
             buttonPeripheral1.Name = "buttonPeripheral1";
             buttonPeripheral1.Secondary = false;
             buttonPeripheral1.Size = new Size(254, 120);
-            buttonPeripheral1.TabIndex = 20;
-            buttonPeripheral1.Text = "Mouse 1";
-            buttonPeripheral1.TextImageRelation = TextImageRelation.ImageBeforeText;
+            buttonPeripheral1.TabIndex = 0;
+            buttonPeripheral1.Text = "ROG Chakram";
+            buttonPeripheral1.TextImageRelation = TextImageRelation.ImageAboveText;
             buttonPeripheral1.UseVisualStyleBackColor = false;
             // 
             // panelAlly
@@ -1985,19 +1963,10 @@ namespace GHelper
             AutoScaleMode = AutoScaleMode.Dpi;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ClientSize = new Size(849, 2075);
-            Controls.Add(panelFooter);
-            Controls.Add(panelVersion);
-            Controls.Add(panelStartup);
-            Controls.Add(panelBattery);
-            Controls.Add(panelPeripherals);
-            Controls.Add(panelKeyboard);
-            Controls.Add(panelAlly);
-            Controls.Add(panelMatrix);
-            Controls.Add(panelGamma);
-            Controls.Add(panelScreen);
-            Controls.Add(panelGPU);
-            Controls.Add(panelPerformance);
+            this.ClientSize = new Size(849, 100);
+            this.Controls.Add(panelPeripherals);
+            this.Controls.Add(panelStartup);
+            this.Controls.Add(panelFooter);
             Margin = new Padding(8, 4, 8, 4);
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
@@ -2006,7 +1975,7 @@ namespace GHelper
             Name = "SettingsForm";
             Padding = new Padding(11);
             ShowIcon = false;
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.Manual;
             Text = "G-Helper";
             panelMatrix.ResumeLayout(false);
             panelMatrix.PerformLayout();
@@ -2075,6 +2044,9 @@ namespace GHelper
         }
 
         #endregion
+        private Panel panelPeripheralsTitle;
+        private PictureBox picturePeripherals;
+        private Label labelPeripherals;
         private Panel panelMatrix;
         private Panel panelBattery;
         private Panel panelFooter;
@@ -2145,7 +2117,6 @@ namespace GHelper
         private RButton buttonPeripheral3;
         private RButton buttonPeripheral1;
         private RButton buttonKeyboard;
-        private RButton buttonUpdates;
         private Label labelCharge;
         private RButton buttonFnLock;
         private RButton buttonBatteryFull;
@@ -2180,7 +2151,6 @@ namespace GHelper
         private Label labelBacklight;
         private Panel panelVersion;
         private Label labelVersion;
-        private RBadgeButton buttonDonate;
         private RButton buttonEnergySaver;
         private RButton buttonHDRControl;
     }
