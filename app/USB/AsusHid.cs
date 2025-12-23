@@ -69,18 +69,6 @@ public static class AsusHid
             var devices = FindDevices(reportId);
             if (devices is null) return null;
 
-            if (AppConfig.IsZ13())
-            {
-                var z13 = devices.Where(device => device.ProductID == 0x1a30).FirstOrDefault();
-                if (z13 is not null) return z13.Open();
-            }
-
-            if (AppConfig.IsS17())
-            {
-                var s17 = devices.Where(device => device.ProductID == 0x18c6).FirstOrDefault();
-                if (s17 is not null) return s17.Open();
-            }
-
             foreach (var device in devices)
                 Logger.WriteLine($"Input available: {device.DevicePath} {device.ProductID.ToString("X")} {device.GetMaxFeatureReportLength()}");
 
