@@ -1,5 +1,5 @@
 ﻿using System.Runtime.InteropServices;
-using GHelper.Helpers;
+using RogMouse.Helpers;
 
 
 public static class NativeMethods

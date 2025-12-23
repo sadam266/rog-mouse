@@ -1,12 +1,12 @@
-﻿using GHelper.Peripherals.Mouse;
-using GHelper.Peripherals.Mouse.Models;
-using HidSharp;
+﻿using HidSharp;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using GHelper.Helpers;
+using RogMouse.Helpers;
+using RogMouse.Peripherals.Mouse;
+using RogMouse.Peripherals.Mouse.Models;
 
-namespace GHelper.Peripherals
+namespace RogMouse.Peripherals
 {
     public class PeripheralsProvider
     {

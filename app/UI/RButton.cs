@@ -1,6 +1,6 @@
 ﻿using System.Drawing.Drawing2D;
 
-namespace GHelper.UI
+namespace RogMouse.UI
 {
     public class RButton : Button
     {
@@ -89,7 +89,7 @@ namespace GHelper.UI
 
             using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius + border))
             using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius))
-            using (Pen penSurface = new Pen(Parent.BackColor, border))
+            using (Pen penSurface = new Pen(Parent!.BackColor, border))
             using (Pen penBorder = new Pen(borderDrawColor, border))
             {
                 penBorder.Alignment = PenAlignment.Outset;

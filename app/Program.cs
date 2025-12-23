@@ -1,14 +1,12 @@
-﻿using GHelper.Helpers;
-using GHelper.Peripherals;
-using GHelper.USB;
+﻿using RogMouse.Helpers;
+using RogMouse.Peripherals;
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 using static NativeMethods;
 
-namespace GHelper
+namespace RogMouse
 {
     static class Program
     {
@@ -30,9 +28,9 @@ namespace GHelper
             string action = "";
             if (args.Length > 0) action = args[0];
 
-            string language = AppConfig.GetString("language");
+            string? language = AppConfig.GetString("language");
 
-            if (language != null && language.Length > 0)
+            if (language is { Length: > 0 })
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(language);
             else
             {
@@ -45,8 +43,8 @@ namespace GHelper
             ProcessHelper.SetPriority();
 
             Logger.WriteLine("------------");
-            Logger.WriteLine("App launched: " + AppConfig.GetModel() + " :" +
-                             Assembly.GetExecutingAssembly().GetName().Version.ToString() +
+            Logger.WriteLine("App launched: " +
+                             Assembly.GetExecutingAssembly().GetName().Version!.ToString() +
                              CultureInfo.CurrentUICulture + (ProcessHelper.IsUserAdministrator() ? "." : ""));
 
             var startCount = AppConfig.Get("start_count") + 1;
@@ -60,7 +58,7 @@ namespace GHelper
 
             trayIcon = new NotifyIcon
             {
-                Text = "G-Helper",
+                Text = "RogMouse",
                 Icon = Properties.Resources.standard,
                 Visible = true
             };
@@ -140,7 +138,7 @@ namespace GHelper
             if (settingsForm.Visible)
             {
                 // If helper window is not on top, this just focuses on the app again
-                // Pressing the ghelper button again will hide the app
+                // Pressing the RogMouse button again will hide the app
                 if (checkForFocus && !settingsForm.HasAnyFocus(trayClick) && !AppConfig.Is("topmost"))
                 {
                     settingsForm.ShowAll();

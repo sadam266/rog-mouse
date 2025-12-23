@@ -1,4 +1,4 @@
-﻿namespace GHelper.Peripherals
+﻿namespace RogMouse.Peripherals
 {
     public enum PeripheralType
     {

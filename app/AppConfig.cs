@@ -1,14 +1,11 @@
-﻿using System.Management;
+﻿namespace RogMouse;
+
 using System.Text.Json;
-using GHelper.Helpers;
+using Helpers;
 
 public static class AppConfig
 {
     private static string configFile;
-
-    private static string? _model;
-    private static string? _modelShort;
-    private static string? _bios;
 
     private static Dictionary<string, object> config = new Dictionary<string, object>();
     private static System.Timers.Timer timer = new System.Timers.Timer(2000);
@@ -17,7 +14,7 @@ public static class AppConfig
     static AppConfig()
     {
         string startupPath = Application.StartupPath.Trim('\\');
-        string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GHelper";
+        string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\RogMouse";
         string configName = "\\config.json";
 
         if (File.Exists(startupPath + configName))
@@ -38,7 +35,7 @@ public static class AppConfig
             string text = File.ReadAllText(configFile);
             try
             {
-                config = JsonSerializer.Deserialize<Dictionary<string, object>>(text);
+                config = JsonSerializer.Deserialize<Dictionary<string, object>>(text)!;
             }
             catch (Exception ex)
             {
@@ -46,7 +43,7 @@ public static class AppConfig
                 try
                 {
                     text = File.ReadAllText(configFile + ".bak");
-                    config = JsonSerializer.Deserialize<Dictionary<string, object>>(text);
+                    config = JsonSerializer.Deserialize<Dictionary<string, object>>(text)!;
                 }
                 catch (Exception exb)
                 {
@@ -116,69 +113,6 @@ public static class AppConfig
         }
     }
 
-    public static string GetModel()
-    {
-        if (_model is null)
-        {
-            _model = "";
-            try
-            {
-                using (var searcher = new ManagementObjectSearcher(@"Select * from Win32_ComputerSystem"))
-                {
-                    foreach (var process in searcher.Get())
-                    {
-                        _model = process["Model"].ToString();
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteLine(ex.Message);
-            }
-        }
-
-        //if (_model.Contains("GA402RK")) _model = "ROG Flow Z13 GZ302EA"; // Debug Purposes
-
-        return _model;
-    }
-
-    public static (string, string) GetBiosAndModel()
-    {
-        if (_bios is not null && _modelShort is not null) return (_bios, _modelShort);
-
-        using (ManagementObjectSearcher objSearcher = new ManagementObjectSearcher(@"SELECT * FROM Win32_BIOS"))
-        {
-            using (ManagementObjectCollection objCollection = objSearcher.Get())
-            {
-                foreach (ManagementObject obj in objCollection)
-                    if (obj["SMBIOSBIOSVersion"] is not null)
-                    {
-                        string[] results = obj["SMBIOSBIOSVersion"].ToString().Split(".");
-                        if (results.Length > 1)
-                        {
-                            _modelShort = results[0];
-                            _bios = results[1];
-                        }
-                        else
-                        {
-                            _modelShort = obj["SMBIOSBIOSVersion"].ToString();
-                        }
-                    }
-
-                return (_bios, _modelShort);
-            }
-        }
-    }
-
-    public static string GetModelShort()
-    {
-        string model = GetModel();
-        int trim = model.LastIndexOf("_");
-        if (trim > 0) model = model.Substring(0, trim);
-        return model;
-    }
-
     private static void Init()
     {
         config = new Dictionary<string, object>();
@@ -187,17 +121,12 @@ public static class AppConfig
         File.WriteAllText(configFile, jsonString);
     }
 
-    public static bool Exists(string name)
-    {
-        return config.ContainsKey(name);
-    }
-
     public static int Get(string name, int empty = -1)
     {
         if (config.ContainsKey(name))
         {
             //Debug.WriteLine(name);
-            return int.Parse(config[name].ToString());
+            return int.Parse(config[name].ToString()!);
         }
         else
         {
@@ -211,22 +140,8 @@ public static class AppConfig
         return Get(name) == 1;
     }
 
-    public static bool IsNotFalse(string name)
-    {
-        return Get(name) != 0;
-    }
-
-    public static bool IsOnBattery(string zone)
-    {
-        return Get(zone + "_bat", Get(zone)) != 0;
-    }
-
-    public static string GetString(string name, string empty = null)
-    {
-        if (config.ContainsKey(name))
-            return config[name].ToString();
-        else return empty;
-    }
+    public static string? GetString(string name, string? empty = null) =>
+        config.TryGetValue(name, out var value) ? value.ToString() : empty;
 
     private static void Write()
     {
@@ -240,48 +155,8 @@ public static class AppConfig
         Write();
     }
 
-    public static void Set(string name, string value)
-    {
-        config[name] = value;
-        Write();
-    }
-
-    public static void Remove(string name)
-    {
-        config.Remove(name);
-        Write();
-    }
-
-    public static byte[] StringToBytes(string str)
-    {
-        String[] arr = str.Split('-');
-        byte[] array = new byte[arr.Length];
-        for (int i = 0; i < arr.Length; i++) array[i] = Convert.ToByte(arr[i], 16);
-        return array;
-    }
-
-    public static bool IsNoOverdrive()
-    {
-        return Is("no_overdrive");
-    }
-
-    public static bool IsNVPlatform()
-    {
-        return Is("nv_platform");
-    }
-
     public static bool IsBWIcon()
     {
         return Is("bw_icon");
-    }
-
-    public static bool SaveDimming()
-    {
-        return Is("save_dimming");
-    }
-
-    public static bool IsAutoStatusLed()
-    {
-        return Is("auto_status_led");
     }
 }

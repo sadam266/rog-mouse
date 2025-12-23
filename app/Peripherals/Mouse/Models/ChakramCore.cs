@@ -1,7 +1,6 @@
-﻿
-using GHelper.Helpers;
+﻿using RogMouse.Helpers;
 
-namespace GHelper.Peripherals.Mouse.Models
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //P511
     public class ChakramCore : AsusMouse

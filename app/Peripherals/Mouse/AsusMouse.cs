@@ -1,9 +1,9 @@
-﻿using GHelper.USB;
+﻿using RogMouse.USB;
 using System.Runtime.CompilerServices;
 using System.Text;
-using GHelper.Helpers;
+using RogMouse.Helpers;
 
-namespace GHelper.Peripherals.Mouse
+namespace RogMouse.Peripherals.Mouse
 {
     public enum PowerOffSetting
     {
@@ -287,7 +287,7 @@ namespace GHelper.Peripherals.Mouse
             return true;
         }
 
-        //GMP1 = G-Helper Mouse Profile Version 1 :D
+        //GMP1 = RogMouse Mouse Profile Version 1 :D
         private static readonly byte[] MAGIC = { (byte)'G', (byte)'M', (byte)'P', (byte)'1' };
 
         public byte[] Export()
@@ -485,7 +485,7 @@ namespace GHelper.Peripherals.Mouse
         }
 
         //Override this for non battery devices to check whether the connection is still there
-        //This function should automatically disconnect the device in GHelper if the device is no longer there or the pipe is broken.
+        //This function should automatically disconnect the device in RogMouse if the device is no longer there or the pipe is broken.
         public virtual void CheckConnection()
         {
             ReadBattery();

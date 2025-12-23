@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
-using GHelper.Helpers;
+using RogMouse.Helpers;
 using HidSharp;
 
-namespace GHelper.USB
+namespace RogMouse.USB
 {
     internal class WindowsUsbProvider : UsbProvider
     {

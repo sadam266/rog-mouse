@@ -1,8 +1,8 @@
-﻿using static GHelper.Peripherals.Mouse.LightingMode;
-using static GHelper.Peripherals.Mouse.LightingZone;
-using static GHelper.Peripherals.Mouse.PollingRate;
+﻿using static RogMouse.Peripherals.Mouse.LightingMode;
+using static RogMouse.Peripherals.Mouse.LightingZone;
+using static RogMouse.Peripherals.Mouse.PollingRate;
 
-namespace GHelper.Peripherals.Mouse.Models
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //SPATHA_WIRELESS
     public class SpathaX : AsusMouse

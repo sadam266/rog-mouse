@@ -1,4 +1,4 @@
-﻿namespace GHelper
+﻿namespace RogMouse
 {
     partial class AsusMouseSettings
     {
@@ -29,76 +29,76 @@
         private void InitializeComponent()
         {
             panelProfiles = new System.Windows.Forms.Panel();
-            comboProfile = new GHelper.UI.RComboBox();
+            comboProfile = new RogMouse.UI.RComboBox();
             labelProfile = new System.Windows.Forms.Label();
             panelPerformance = new System.Windows.Forms.Panel();
             panelPerformanceOther = new System.Windows.Forms.Panel();
             panelDeceleration = new System.Windows.Forms.Panel();
             labelDeceleration = new System.Windows.Forms.Label();
-            sliderDeceleration = new GHelper.UI.Slider();
+            sliderDeceleration = new RogMouse.UI.Slider();
             labelDecelerationValue = new System.Windows.Forms.Label();
             panelAcceleration = new System.Windows.Forms.Panel();
             labelAcceleration = new System.Windows.Forms.Label();
-            sliderAcceleration = new GHelper.UI.Slider();
+            sliderAcceleration = new RogMouse.UI.Slider();
             labelAccelerationValue = new System.Windows.Forms.Label();
             panelLiftOffDistance = new System.Windows.Forms.Panel();
             labelLiftOffDistance = new System.Windows.Forms.Label();
-            comboBoxLiftOffDistance = new GHelper.UI.RComboBox();
+            comboBoxLiftOffDistance = new RogMouse.UI.RComboBox();
             panelDebounce = new System.Windows.Forms.Panel();
             labelButtonDebounce = new System.Windows.Forms.Label();
-            sliderButtonDebounce = new GHelper.UI.Slider();
+            sliderButtonDebounce = new RogMouse.UI.Slider();
             labelButtonDebounceValue = new System.Windows.Forms.Label();
             panelAngleSnapping = new System.Windows.Forms.Panel();
-            sliderAngleAdjustment = new GHelper.UI.Slider();
+            sliderAngleAdjustment = new RogMouse.UI.Slider();
             checkBoxAngleSnapping = new System.Windows.Forms.CheckBox();
             labelAngleAdjustmentValue = new System.Windows.Forms.Label();
             panelPollingRate = new System.Windows.Forms.Panel();
             labelPollingRate = new System.Windows.Forms.Label();
-            comboBoxPollingRate = new GHelper.UI.RComboBox();
+            comboBoxPollingRate = new RogMouse.UI.RComboBox();
             panelDPISettings = new System.Windows.Forms.Panel();
-            sliderDPI = new GHelper.UI.Slider();
+            sliderDPI = new RogMouse.UI.Slider();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             labelMinDPI = new System.Windows.Forms.Label();
             labelMaxDPI = new System.Windows.Forms.Label();
             numericUpDownCurrentDPI = new System.Windows.Forms.NumericUpDown();
             panelDPITile = new System.Windows.Forms.Panel();
             pictureDPIColor = new System.Windows.Forms.PictureBox();
-            buttonDPIColor = new GHelper.UI.RButton();
+            buttonDPIColor = new RogMouse.UI.RButton();
             labelDPI = new System.Windows.Forms.Label();
             tableDPI = new System.Windows.Forms.TableLayoutPanel();
-            buttonDPI2 = new GHelper.UI.RButton();
-            buttonDPI1 = new GHelper.UI.RButton();
-            buttonDPI3 = new GHelper.UI.RButton();
-            buttonDPI4 = new GHelper.UI.RButton();
+            buttonDPI2 = new RogMouse.UI.RButton();
+            buttonDPI1 = new RogMouse.UI.RButton();
+            buttonDPI3 = new RogMouse.UI.RButton();
+            buttonDPI4 = new RogMouse.UI.RButton();
             panelPerformanceHeader = new System.Windows.Forms.Panel();
             pictureKeyboard = new System.Windows.Forms.PictureBox();
             labelPerformance = new System.Windows.Forms.Label();
             panelLighting = new System.Windows.Forms.Panel();
             panelLightingContent = new System.Windows.Forms.Panel();
             tableLayoutLightingZones = new System.Windows.Forms.TableLayoutPanel();
-            buttonLightingZoneScroll = new GHelper.UI.RButton();
-            buttonLightingZoneLogo = new GHelper.UI.RButton();
-            buttonLightingZoneAll = new GHelper.UI.RButton();
-            buttonLightingZoneUnderglow = new GHelper.UI.RButton();
-            buttonLightingZoneDock = new GHelper.UI.RButton();
-            comboBoxAnimationDirection = new GHelper.UI.RComboBox();
+            buttonLightingZoneScroll = new RogMouse.UI.RButton();
+            buttonLightingZoneLogo = new RogMouse.UI.RButton();
+            buttonLightingZoneAll = new RogMouse.UI.RButton();
+            buttonLightingZoneUnderglow = new RogMouse.UI.RButton();
+            buttonLightingZoneDock = new RogMouse.UI.RButton();
+            comboBoxAnimationDirection = new RogMouse.UI.RComboBox();
             labelAnimationDirection = new System.Windows.Forms.Label();
             checkBoxRandomColor = new System.Windows.Forms.CheckBox();
-            comboBoxAnimationSpeed = new GHelper.UI.RComboBox();
+            comboBoxAnimationSpeed = new RogMouse.UI.RComboBox();
             labelAnimationSpeed = new System.Windows.Forms.Label();
             pictureBoxLightingColor = new System.Windows.Forms.PictureBox();
-            buttonLightingColor = new GHelper.UI.RButton();
-            comboBoxLightingMode = new GHelper.UI.RComboBox();
+            buttonLightingColor = new RogMouse.UI.RButton();
+            comboBoxLightingMode = new RogMouse.UI.RComboBox();
             labelLightingMode = new System.Windows.Forms.Label();
             panelLightingHeader = new System.Windows.Forms.Panel();
             labelBrightnessValue = new System.Windows.Forms.Label();
-            sliderBrightness = new GHelper.UI.Slider();
+            sliderBrightness = new RogMouse.UI.Slider();
             pictureBoxLighting = new System.Windows.Forms.PictureBox();
             labelLighting = new System.Windows.Forms.Label();
             panelEnergy = new System.Windows.Forms.Panel();
             labelLowBatteryWarningValue = new System.Windows.Forms.Label();
-            comboBoxAutoPowerOff = new GHelper.UI.RComboBox();
-            sliderLowBatteryWarning = new GHelper.UI.Slider();
+            comboBoxAutoPowerOff = new RogMouse.UI.RComboBox();
+            sliderLowBatteryWarning = new RogMouse.UI.Slider();
             labelLowBatteryWarning = new System.Windows.Forms.Label();
             labelAutoPowerOff = new System.Windows.Forms.Label();
             panelEnergyHeader = new System.Windows.Forms.Panel();
@@ -109,13 +109,13 @@
             labelChargingState = new System.Windows.Forms.Label();
             labelBatteryState = new System.Windows.Forms.Label();
             pictureBoxBatteryState = new System.Windows.Forms.PictureBox();
-            buttonSync = new GHelper.UI.RButton();
+            buttonSync = new RogMouse.UI.RButton();
             panelBottomButtons = new System.Windows.Forms.Panel();
-            buttonImport = new GHelper.UI.RButton();
-            buttonExport = new GHelper.UI.RButton();
+            buttonImport = new RogMouse.UI.RButton();
+            buttonExport = new RogMouse.UI.RButton();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            rButton1 = new GHelper.UI.RButton();
-            rButton2 = new GHelper.UI.RButton();
+            rButton1 = new RogMouse.UI.RButton();
+            rButton2 = new RogMouse.UI.RButton();
             panelProfiles.SuspendLayout();
             panelPerformance.SuspendLayout();
             panelPerformanceOther.SuspendLayout();
@@ -619,7 +619,7 @@
             buttonDPIColor.Secondary = false;
             buttonDPIColor.Size = new System.Drawing.Size(254, 44);
             buttonDPIColor.TabIndex = 45;
-            buttonDPIColor.Text = global::GHelper.Properties.Strings.Color;
+            buttonDPIColor.Text = global::RogMouse.Properties.Strings.Color;
             buttonDPIColor.UseVisualStyleBackColor = false;
             // 
             // labelDPI
@@ -668,7 +668,7 @@
             buttonDPI2.FlatAppearance.BorderSize = 0;
             buttonDPI2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonDPI2.ForeColor = System.Drawing.SystemColors.ControlText;
-            buttonDPI2.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            buttonDPI2.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             buttonDPI2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             buttonDPI2.Location = new System.Drawing.Point(230, 4);
             buttonDPI2.Margin = new System.Windows.Forms.Padding(4);
@@ -692,7 +692,7 @@
             buttonDPI1.FlatAppearance.BorderSize = 0;
             buttonDPI1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonDPI1.ForeColor = System.Drawing.SystemColors.ControlText;
-            buttonDPI1.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            buttonDPI1.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             buttonDPI1.Location = new System.Drawing.Point(4, 4);
             buttonDPI1.Margin = new System.Windows.Forms.Padding(4);
             buttonDPI1.Name = "buttonDPI1";
@@ -714,7 +714,7 @@
             buttonDPI3.FlatAppearance.BorderSize = 0;
             buttonDPI3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonDPI3.ForeColor = System.Drawing.SystemColors.ControlText;
-            buttonDPI3.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            buttonDPI3.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             buttonDPI3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             buttonDPI3.Location = new System.Drawing.Point(456, 4);
             buttonDPI3.Margin = new System.Windows.Forms.Padding(4);
@@ -737,7 +737,7 @@
             buttonDPI4.FlatAppearance.BorderSize = 0;
             buttonDPI4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonDPI4.ForeColor = System.Drawing.SystemColors.ControlText;
-            buttonDPI4.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            buttonDPI4.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             buttonDPI4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             buttonDPI4.Location = new System.Drawing.Point(682, 4);
             buttonDPI4.Margin = new System.Windows.Forms.Padding(4);
@@ -763,7 +763,7 @@
             // 
             // pictureKeyboard
             // 
-            pictureKeyboard.BackgroundImage = global::GHelper.Properties.Resources.icons8_mauszeiger_50;
+            pictureKeyboard.BackgroundImage = global::RogMouse.Properties.Resources.icons8_mauszeiger_50;
             pictureKeyboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             pictureKeyboard.Location = new System.Drawing.Point(6, 0);
             pictureKeyboard.Margin = new System.Windows.Forms.Padding(4);
@@ -1042,7 +1042,7 @@
             buttonLightingColor.Secondary = false;
             buttonLightingColor.Size = new System.Drawing.Size(180, 50);
             buttonLightingColor.TabIndex = 49;
-            buttonLightingColor.Text = global::GHelper.Properties.Strings.Color;
+            buttonLightingColor.Text = global::RogMouse.Properties.Strings.Color;
             buttonLightingColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             buttonLightingColor.UseVisualStyleBackColor = false;
             // 
@@ -1108,7 +1108,7 @@
             // 
             // pictureBoxLighting
             // 
-            pictureBoxLighting.BackgroundImage = global::GHelper.Properties.Resources.backlight;
+            pictureBoxLighting.BackgroundImage = global::RogMouse.Properties.Resources.backlight;
             pictureBoxLighting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             pictureBoxLighting.Location = new System.Drawing.Point(6, 0);
             pictureBoxLighting.Margin = new System.Windows.Forms.Padding(4);
@@ -1293,7 +1293,7 @@
             // 
             // pictureBoxBatteryState
             // 
-            pictureBoxBatteryState.BackgroundImage = global::GHelper.Properties.Resources.icons8_ladende_batterie_48;
+            pictureBoxBatteryState.BackgroundImage = global::RogMouse.Properties.Resources.icons8_ladende_batterie_48;
             pictureBoxBatteryState.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             pictureBoxBatteryState.Dock = System.Windows.Forms.DockStyle.Left;
             pictureBoxBatteryState.Location = new System.Drawing.Point(0, 0);
@@ -1404,7 +1404,7 @@
             rButton1.FlatAppearance.BorderSize = 0;
             rButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             rButton1.ForeColor = System.Drawing.SystemColors.ControlText;
-            rButton1.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            rButton1.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             rButton1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             rButton1.Location = new System.Drawing.Point(3, 3);
             rButton1.Name = "rButton1";
@@ -1427,7 +1427,7 @@
             rButton2.FlatAppearance.BorderSize = 0;
             rButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             rButton2.ForeColor = System.Drawing.SystemColors.ControlText;
-            rButton2.Image = global::GHelper.Properties.Resources.lighting_dot_32;
+            rButton2.Image = global::RogMouse.Properties.Resources.lighting_dot_32;
             rButton2.Location = new System.Drawing.Point(3, 3);
             rButton2.Name = "rButton2";
             rButton2.Secondary = false;
@@ -1527,32 +1527,31 @@
         private PictureBox pictureBoxEnergy;
         private Label labelEnergy;
         private System.Windows.Forms.TableLayoutPanel tableDPI;
-        private GHelper.UI.RButton buttonDPI2;
-        private GHelper.UI.RButton buttonDPI1;
-        private GHelper.UI.RButton buttonDPI3;
-        private GHelper.UI.RButton buttonDPI4;
-        private GHelper.UI.Slider sliderDPI;
+        private RogMouse.UI.RButton buttonDPI2;
+        private RogMouse.UI.RButton buttonDPI1;
+        private RogMouse.UI.RButton buttonDPI3;
+        private RogMouse.UI.RButton buttonDPI4;
+        private RogMouse.UI.Slider sliderDPI;
         private System.Windows.Forms.Panel panelDPISettings;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelMinDPI;
         private System.Windows.Forms.Panel panelDPITile;
         private Label labelDPI;
-        private TableLayoutPanel tableLayoutPollingRate;
         private UI.RComboBox comboBoxPollingRate;
         private UI.Slider sliderAngleAdjustment;
         private CheckBox checkBoxAngleSnapping;
         private System.Windows.Forms.Panel panelPerformanceOther;
         private System.Windows.Forms.TableLayoutPanel tableLayoutProfiles;
-        private GHelper.UI.RButton buttonDPIColor;
+        private RogMouse.UI.RButton buttonDPIColor;
         private System.Windows.Forms.PictureBox pictureDPIColor;
-        private GHelper.UI.Slider sliderBrightness;
+        private RogMouse.UI.Slider sliderBrightness;
         private Label labelPollingRate;
         private Label labelAngleAdjustmentValue;
         private System.Windows.Forms.Panel panelLightingContent;
         private UI.RComboBox comboBoxLightingMode;
         private Label labelLightingMode;
         private System.Windows.Forms.PictureBox pictureBoxLightingColor;
-        private GHelper.UI.RButton buttonLightingColor;
+        private RogMouse.UI.RButton buttonLightingColor;
         private CheckBox checkBoxRandomColor;
         private UI.RComboBox comboBoxAnimationSpeed;
         private Label labelAnimationSpeed;
@@ -1569,14 +1568,14 @@
         private Label labelChargingState;
         private Label labelBatteryState;
         private PictureBox pictureBoxBatteryState;
-        private GHelper.UI.RButton buttonSync;
+        private RogMouse.UI.RButton buttonSync;
         private System.Windows.Forms.Panel panelBottomButtons;
         private System.Windows.Forms.TableLayoutPanel tableLayoutLightingZones;
-        private GHelper.UI.RButton buttonLightingZoneScroll;
-        private GHelper.UI.RButton buttonLightingZoneLogo;
-        private GHelper.UI.RButton buttonLightingZoneAll;
-        private GHelper.UI.RButton buttonLightingZoneUnderglow;
-        private GHelper.UI.RButton buttonLightingZoneDock;
+        private RogMouse.UI.RButton buttonLightingZoneScroll;
+        private RogMouse.UI.RButton buttonLightingZoneLogo;
+        private RogMouse.UI.RButton buttonLightingZoneAll;
+        private RogMouse.UI.RButton buttonLightingZoneUnderglow;
+        private RogMouse.UI.RButton buttonLightingZoneDock;
         private TableLayoutPanel tableLayoutPanel2;
         private UI.RButton rButton1;
         private UI.RButton rButton2;
@@ -1595,8 +1594,8 @@
         private Label labelAcceleration;
         private UI.Slider sliderAcceleration;
         private Label labelAccelerationValue;
-        private GHelper.UI.RButton buttonImport;
-        private GHelper.UI.RButton buttonExport;
+        private RogMouse.UI.RButton buttonImport;
+        private RogMouse.UI.RButton buttonExport;
         private System.Windows.Forms.NumericUpDown numericUpDownCurrentDPI;
         private System.Windows.Forms.Label labelMaxDPI;
     }

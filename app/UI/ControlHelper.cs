@@ -1,4 +1,4 @@
-﻿namespace GHelper.UI;
+﻿namespace RogMouse.UI;
 
 using System.Drawing.Drawing2D;
 

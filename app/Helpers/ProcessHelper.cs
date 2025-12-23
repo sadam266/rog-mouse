@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Security.Principal;
 
-namespace GHelper.Helpers
+namespace RogMouse.Helpers
 {
     public static class ProcessHelper
     {

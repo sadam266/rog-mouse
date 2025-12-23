@@ -1,8 +1,8 @@
-﻿using GHelper.Helpers;
+﻿using RogMouse.Helpers;
 using HidSharp;
 using HidSharp.Reports;
 
-namespace GHelper.USB;
+namespace RogMouse.USB;
 public static class AsusHid
 {
     public const int ASUS_ID = 0x0b05;
@@ -55,7 +55,7 @@ public static class AsusHid
             {
                 isValid = device.GetReportDescriptor().TryGetReport(ReportType.Feature, reportId, out _);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Logger.WriteLine($"Error getting report descriptor for device {device.ProductID.ToString("X")}: {ex.Message}");
             }
@@ -85,17 +85,15 @@ public static class AsusHid
 
     public static void WriteInput(byte[] data, string? log = "USB")
     {
-        foreach (var device in FindDevices(INPUT_ID))
+        foreach (var device in FindDevices(INPUT_ID)!)
         {
             try
             {
-                using (var stream = device.Open())
-                {
-                    var payload = new byte[device.GetMaxFeatureReportLength()];
-                    Array.Copy(data, payload, data.Length);
-                    stream.SetFeature(payload);
-                    if (log is not null) Logger.WriteLine($"{log} {device.ProductID.ToString("X")}|{device.GetMaxFeatureReportLength()}: {BitConverter.ToString(data)}");
-                }
+                using var stream = device.Open();
+                var payload = new byte[device.GetMaxFeatureReportLength()];
+                Array.Copy(data, payload, data.Length);
+                stream.SetFeature(payload);
+                if (log is not null) Logger.WriteLine($"{log} {device.ProductID.ToString("X")}|{device.GetMaxFeatureReportLength()}: {BitConverter.ToString(data)}");
             }
             catch (Exception ex)
             {

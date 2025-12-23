@@ -1,4 +1,4 @@
-﻿namespace GHelper.USB
+﻿namespace RogMouse.USB
 {
     public abstract class UsbProvider : IDisposable
     {

@@ -157,7 +157,7 @@
     <value>Az alkalmazás már el lett inítva</value>
   </data>
   <data name="AppAlreadyRunningText" xml:space="preserve">
-    <value>A G-Helper már fut. A rendszertárcán megtalálod az alkalmazás ikonját.</value>
+    <value>A RogMouse már fut. A rendszertárcán megtalálod az alkalmazás ikonját.</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Alkalmaz</value>
@@ -617,8 +617,8 @@ Folytatni szeretnéd?</value>
   <data name="OneZone" xml:space="preserve">
     <value>Egy Zóna</value>
   </data>
-  <data name="OpenGHelper" xml:space="preserve">
-    <value>G-Helper ablak megnyitása</value>
+  <data name="OpenRogMouse" xml:space="preserve">
+    <value>RogMouse ablak megnyitása</value>
   </data>
   <data name="Optimized" xml:space="preserve">
     <value>Optimalizált</value>
@@ -669,7 +669,7 @@ Folytatni szeretnéd?</value>
     <value>Visszaállítás</value>
   </data>
   <data name="RestartGPU" xml:space="preserve">
-    <value>Valami használja még a dGPU-t, ezzel megakadályozva az Eco móda lépést. Próbálja meg a G-Helper újraindítani a dGPU-t az eszközkezelőben? (Kérjük, saját felelősségére folytassa)</value>
+    <value>Valami használja még a dGPU-t, ezzel megakadályozva az Eco móda lépést. Próbálja meg a RogMouse újraindítani a dGPU-t az eszközkezelőben? (Kérjük, saját felelősségére folytassa)</value>
   </data>
   <data name="RPM" xml:space="preserve">
     <value>Fordulatszám</value>

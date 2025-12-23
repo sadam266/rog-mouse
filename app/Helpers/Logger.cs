@@ -1,10 +1,10 @@
-﻿namespace GHelper.Helpers;
+﻿namespace RogMouse.Helpers;
 
 using System.Diagnostics;
 
 public static class Logger
 {
-    public static string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GHelper";
+    public static string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\RogMouse";
     public static string logFile = appPath + "\\log.txt";
 
     public static void WriteLine(string logMessage)

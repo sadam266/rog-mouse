@@ -1,31 +1,23 @@
-﻿using GHelper.Helpers;
-using GHelper.Peripherals;
-using GHelper.Peripherals.Mouse;
-using GHelper.UI;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Timers;
+using RogMouse.Helpers;
+using RogMouse.Peripherals;
+using RogMouse.Peripherals.Mouse;
+using RogMouse.UI;
 
-namespace GHelper
+namespace RogMouse
 {
     public partial class SettingsForm : RForm
     {
         ContextMenuStrip contextMenuStrip = new CustomContextMenu();
-        ToolStripMenuItem menuEco, menuStandard, menuUltimate, menuOptimized;
 
         AsusMouseSettings? mouseSettings;
 
         public static System.Timers.Timer sensorTimer = default!;
 
         static long lastRefresh;
-        static long lastBatteryRefresh;
         static long lastLostFocus;
 
-        bool isGpuSection = true;
-
-        bool batteryMouseOver = false;
-        bool batteryFullMouseOver = false;
-
-        bool sliderGammaIgnore = false;
         bool activateCheck = false;
 
         public SettingsForm()
@@ -218,7 +210,7 @@ namespace GHelper
             if (!force && Math.Abs(DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastRefresh) < 2000) return;
             lastRefresh = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-            Task.Run((Action)PeripheralsProvider.RefreshBatteryForAllDevices);
+            await Task.Run((Action)PeripheralsProvider.RefreshBatteryForAllDevices);
 
             string trayTip = "TODO device list";
 

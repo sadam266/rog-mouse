@@ -1,6 +1,6 @@
-﻿using GHelper.UI;
+﻿using RogMouse.UI;
 
-namespace GHelper
+namespace RogMouse
 {
     partial class SettingsForm
     {
@@ -34,9 +34,9 @@ namespace GHelper
             panelStartup = new System.Windows.Forms.Panel();
             panelPeripherals = new System.Windows.Forms.Panel();
             tableLayoutPeripherals = new System.Windows.Forms.TableLayoutPanel();
-            buttonPeripheral = new GHelper.UI.RButton();
+            buttonPeripheral = new RButton();
             tableButtons = new System.Windows.Forms.TableLayoutPanel();
-            buttonQuit = new GHelper.UI.RButton();
+            buttonQuit = new RButton();
             panelFooter = new System.Windows.Forms.Panel();
             panelStartup.SuspendLayout();
             panelPeripherals.SuspendLayout();
@@ -55,7 +55,7 @@ namespace GHelper
             checkStartup.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             checkStartup.Size = new System.Drawing.Size(167, 50);
             checkStartup.TabIndex = 21;
-            checkStartup.Text = global::GHelper.Properties.Strings.RunOnStartup;
+            checkStartup.Text = global::RogMouse.Properties.Strings.RunOnStartup;
             checkStartup.UseVisualStyleBackColor = true;
             // 
             // panelStartup
@@ -114,7 +114,7 @@ namespace GHelper
             buttonPeripheral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             buttonPeripheral.Font = new System.Drawing.Font("Segoe UI", 8F);
             buttonPeripheral.ForeColor = System.Drawing.SystemColors.ControlText;
-            buttonPeripheral.Image = global::GHelper.Properties.Resources.icons8_maus_48;
+            buttonPeripheral.Image = global::RogMouse.Properties.Resources.icons8_maus_48;
             buttonPeripheral.Location = new System.Drawing.Point(4, 4);
             buttonPeripheral.Margin = new System.Windows.Forms.Padding(4);
             buttonPeripheral.Name = "buttonPeripheral";
@@ -209,12 +209,12 @@ namespace GHelper
         #endregion
 
         private System.Windows.Forms.Panel panelFooter;
-        private GHelper.UI.RButton buttonQuit;
+        private RButton buttonQuit;
         private System.Windows.Forms.CheckBox checkStartup;
         private System.Windows.Forms.Panel panelStartup;
         private System.Windows.Forms.TableLayoutPanel tableButtons;
         private System.Windows.Forms.Panel panelPeripherals;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPeripherals;
-        private GHelper.UI.RButton buttonPeripheral;
+        private RButton buttonPeripheral;
     }
 }

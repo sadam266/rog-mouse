@@ -1,6 +1,6 @@
-﻿using GHelper.Helpers;
+﻿using RogMouse.Helpers;
 
-namespace GHelper.Peripherals.Mouse.Models
+namespace RogMouse.Peripherals.Mouse.Models
 {
     public class GladiusIIWireless : AsusMouse
     {

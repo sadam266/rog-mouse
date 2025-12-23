@@ -1,7 +1,7 @@
 ﻿
-using GHelper.Helpers;
+using RogMouse.Helpers;
 
-namespace GHelper.Peripherals.Mouse.Models
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //P705
     public class PugioII : AsusMouse

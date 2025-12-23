@@ -1,8 +1,8 @@
-﻿using GHelper.Helpers;
-using GHelper.Peripherals.Mouse;
-using GHelper.UI;
+﻿using RogMouse.Helpers;
+using RogMouse.Peripherals.Mouse;
+using RogMouse.UI;
 
-namespace GHelper
+namespace RogMouse
 {
     public partial class AsusMouseSettings : RForm
     {
@@ -935,12 +935,12 @@ namespace GHelper
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            byte[] data = null;
+            byte[]? data = null;
 
             Thread t = new Thread(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+                ofd.Filter = "RogMouse Mouse Profile V1 (*.gmp1)|*.gmp1";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -979,7 +979,7 @@ namespace GHelper
             Thread t = new Thread(() =>
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+                sfd.Filter = "RogMouse Mouse Profile V1 (*.gmp1)|*.gmp1";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {

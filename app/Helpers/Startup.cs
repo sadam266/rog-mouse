@@ -2,11 +2,11 @@
 using System.Reflection;
 using Microsoft.Win32.TaskScheduler;
 
-namespace GHelper.Helpers;
+namespace RogMouse.Helpers;
 
 public static class Startup
 {
-    static string taskName = "GHelper";
+    static string taskName = "RogMouse";
     static string chargeTaskName = taskName + "Charge";
     static string strExeFilePath = Application.ExecutablePath.Trim();
 
@@ -53,8 +53,8 @@ public static class Startup
                     {
                         try
                         {
-                            var currentVer = Assembly.GetEntryAssembly().GetName().Version;
-                            var fv = FileVersionInfo.GetVersionInfo(action).FileVersion.Split('.');
+                            var currentVer = Assembly.GetEntryAssembly()!.GetName().Version;
+                            var fv = FileVersionInfo.GetVersionInfo(action).FileVersion!.Split('.');
                             var scheduledVer = new Version(
                                 int.Parse(fv[0]),
                                 fv.Length > 1 ? int.Parse(fv[1]) : 0,
@@ -114,7 +114,7 @@ public static class Startup
         if (strExeFilePath is null) return;
 
         using TaskDefinition td = TaskService.Instance.NewTask();
-        td.RegistrationInfo.Description = "G-Helper Charge Limit";
+        td.RegistrationInfo.Description = "RogMouse Charge Limit";
         td.Triggers.Add(new BootTrigger());
         td.Triggers.Add(new EventTrigger
         {
@@ -148,7 +148,7 @@ public static class Startup
         using (TaskDefinition td = TaskService.Instance.NewTask())
         {
 
-            td.RegistrationInfo.Description = "G-Helper Auto Start";
+            td.RegistrationInfo.Description = "RogMouse Auto Start";
             td.Triggers.Add(new LogonTrigger { Delay = TimeSpan.FromSeconds(1) });
             td.Actions.Add(strExeFilePath);
 
@@ -164,10 +164,10 @@ public static class Startup
             {
                 TaskService.Instance.RootFolder.RegisterTaskDefinition(taskName, td);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 if (ProcessHelper.IsUserAdministrator())
-                    MessageBox.Show("Can't create a start up task. Try running Task Scheduler by hand and manually deleting GHelper task if it exists there.", "Scheduler Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Can't create a start up task. Try running Task Scheduler by hand and manually deleting RogMouse task if it exists there.", "Scheduler Error", MessageBoxButtons.OK);
                 else
                     ProcessHelper.RunAsAdmin();
             }
@@ -187,10 +187,10 @@ public static class Startup
             {
                 taskService.RootFolder.DeleteTask(taskName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 if (ProcessHelper.IsUserAdministrator())
-                    MessageBox.Show("Can't remove task. Try running Task Scheduler by hand and manually deleting GHelper task if it exists there.", "Scheduler Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Can't remove task. Try running Task Scheduler by hand and manually deleting RogMouse task if it exists there.", "Scheduler Error", MessageBoxButtons.OK);
                 else
                     ProcessHelper.RunAsAdmin();
             }
