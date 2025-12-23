@@ -176,19 +176,10 @@ namespace GHelper.Peripherals
 
         private static void UpdateSettingsView()
         {
-            if (Program.settingsForm == null || Program.settingsForm.IsDisposed) return;
-
-            if (Program.settingsForm.InvokeRequired)
-            {
-                Program.settingsForm.Invoke(delegate
-                {
-                    Program.settingsForm.VisualizePeripherals();
-                });
-            }
-            else
+            Program.settingsForm.Invoke(delegate
             {
                 Program.settingsForm.VisualizePeripherals();
-            }
+            });
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

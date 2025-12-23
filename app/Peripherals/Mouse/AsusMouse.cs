@@ -211,9 +211,6 @@ namespace GHelper.Peripherals.Mouse
 
         private readonly string path;
 
-        public new ushort VendorID() => _vendorId;
-        public new ushort ProductID() => _productId;
-
         protected byte reportId = 0x00;
 
         public bool IsDeviceReady { get; protected set; }

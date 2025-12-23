@@ -55,14 +55,10 @@ namespace GHelper
             buttonLightingZoneAll.Text = Properties.Strings.AuraZoneAll;
             buttonLightingZoneDock.Text = Properties.Strings.AuraZoneDock;
 
-            pictureKeyboard.BackgroundImage = ControlHelper.TintImage(Properties.Resources.icons8_processor_32, RForm.foreMain);
-            pictureBoxLighting.BackgroundImage = ControlHelper.TintImage(Properties.Resources.icons8_project_management_48__1_, RForm.foreMain);
-            pictureBoxEnergy.BackgroundImage = ControlHelper.TintImage(Properties.Resources.icons8_charging_battery_32, RForm.foreMain);
+            buttonExport.Text = Properties.Strings.Export;
+            buttonImport.Text = Properties.Strings.Import;
 
             InitTheme();
-
-            this.BackColor = RForm.formBack;
-            ControlHelper.ApplyTheme(this);
 
             this.Text = mouse.GetDisplayName();
 
@@ -108,14 +104,10 @@ namespace GHelper
 
 
             buttonLightingZoneAll.Click += ButtonLightingZoneAll_Click;
-            buttonLightingZoneLogo.Click += ButtonLightingZoneLogo_Click;
-            buttonLightingZoneScroll.Click += ButtonLightingZoneScroll_Click;
-            buttonLightingZoneUnderglow.Click += ButtonLightingZoneUnderglow_Click;
             buttonLightingZoneDock.Click += ButtonLightingZoneDock_Click;
-
-            buttonSync.Click += ButtonSync_Click;
-            buttonExport.Click += buttonExport_Click;
-            buttonImport.Click += buttonImport_Click;
+            buttonLightingZoneLogo.Click += ButtonLightingZoneLogo_Click;
+            buttonLightingZoneUnderglow.Click += ButtonLightingZoneUnderglow_Click;
+            buttonLightingZoneScroll.Click += ButtonLightingZoneScroll_Click;
 
             InitMouseCapabilities();
             Logger.WriteLine(mouse.GetDisplayName() + " (GUI): Initialized capabilities. Synchronizing mouse data");
@@ -698,22 +690,9 @@ namespace GHelper
             }
 
 
-            panelPerformanceHeader.BackColor = RForm.buttonSecond;
-            panelLightingHeader.BackColor = RForm.buttonSecond;
-            panelEnergyHeader.BackColor = RForm.buttonSecond;
-
             VisualizeDPIButtons();
             VisualizeCurrentDPIProfile();
             VisusalizeLightingSettings();
-
-            buttonSync.BackColor = RForm.buttonMain;
-            buttonSync.ForeColor = RForm.foreMain;
-
-            buttonExport.BackColor = RForm.buttonSecond;
-            buttonExport.ForeColor = RForm.foreMain;
-
-            buttonImport.BackColor = RForm.buttonSecond;
-            buttonImport.ForeColor = RForm.foreMain;
 
             if (mouse.CanSetPollingRate())
             {
@@ -803,12 +782,6 @@ namespace GHelper
             buttonLightingZoneUnderglow.Activated = visibleZone == LightingZone.Underglow;
             buttonLightingZoneDock.Activated = visibleZone == LightingZone.Dock;
 
-            buttonLightingZoneAll.Image = ControlHelper.TintImage(Properties.Resources.icons8_project_management_48__1_, RForm.foreMain);
-            buttonLightingZoneLogo.Image = ControlHelper.TintImage(Properties.Resources.icons8_maus_48, RForm.foreMain);
-            buttonLightingZoneScroll.Image = ControlHelper.TintImage(Properties.Resources.icons8_mauszeiger_50, RForm.foreMain);
-            buttonLightingZoneUnderglow.Image = ControlHelper.TintImage(Properties.Resources.icons8_next_32, RForm.foreMain);
-            buttonLightingZoneDock.Image = ControlHelper.TintImage(Properties.Resources.icons8_charging_battery_32, RForm.foreMain);
-
             buttonLightingZoneAll.Secondary = zoned;
             buttonLightingZoneLogo.Secondary = !zoned;
             buttonLightingZoneScroll.Secondary = !zoned;
@@ -820,12 +793,6 @@ namespace GHelper
             buttonLightingZoneScroll.BackColor = buttonLightingZoneScroll.Secondary ? RForm.buttonSecond : RForm.buttonMain;
             buttonLightingZoneUnderglow.BackColor = buttonLightingZoneUnderglow.Secondary ? RForm.buttonSecond : RForm.buttonMain;
             buttonLightingZoneDock.BackColor = buttonLightingZoneDock.Secondary ? RForm.buttonSecond : RForm.buttonMain;
-
-            buttonLightingZoneAll.ForeColor = RForm.foreMain;
-            buttonLightingZoneLogo.ForeColor = RForm.foreMain;
-            buttonLightingZoneScroll.ForeColor = RForm.foreMain;
-            buttonLightingZoneUnderglow.ForeColor = RForm.foreMain;
-            buttonLightingZoneDock.ForeColor = RForm.foreMain;
         }
 
         private void VisusalizeLightingSettings()
