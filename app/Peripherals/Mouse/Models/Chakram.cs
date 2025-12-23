@@ -1,16 +1,18 @@
-﻿
-namespace GHelper.Peripherals.Mouse.Models
+﻿using RogMouse.Helpers;
+
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //P704
     public class Chakram : AsusMouse
     {
-        public Chakram() : base(0x0B05, 0x18E5, "mi_00", true) { 
-        
+        public Chakram() : base(0x0B05, 0x18E5, "mi_00", true)
+        {
         }
 
         protected Chakram(ushort vendorId, bool wireless) : base(0x0B05, vendorId, "mi_00", wireless)
         {
         }
+
         public override int DPIProfileCount()
         {
             return 4;
@@ -23,7 +25,8 @@ namespace GHelper.Peripherals.Mouse.Models
 
         public override PollingRate[] SupportedPollingrates()
         {
-            return new PollingRate[] {
+            return new PollingRate[]
+            {
                 PollingRate.PR125Hz,
                 PollingRate.PR250Hz,
                 PollingRate.PR500Hz,
@@ -36,6 +39,7 @@ namespace GHelper.Peripherals.Mouse.Models
         {
             return 3;
         }
+
         public override int MaxDPI()
         {
             return 16_000;
@@ -45,10 +49,12 @@ namespace GHelper.Peripherals.Mouse.Models
         {
             return true;
         }
+
         public override bool HasLiftOffSetting()
         {
             return true;
         }
+
         public override int DPIIncrements()
         {
             return 100;
@@ -58,6 +64,7 @@ namespace GHelper.Peripherals.Mouse.Models
         {
             return true;
         }
+
         public override int MaxBrightness()
         {
             return 4;
@@ -102,14 +109,17 @@ namespace GHelper.Peripherals.Mouse.Models
         {
             return base.ParseBattery(packet) * 25;
         }
+
         protected override int ParseLowBatteryWarning(byte[] packet)
         {
             return base.ParseLowBatteryWarning(packet) * 25;
         }
+
         protected override byte[] GetUpdateEnergySettingsPacket(int lowBatteryWarning, PowerOffSetting powerOff)
         {
             return base.GetUpdateEnergySettingsPacket(lowBatteryWarning / 25, powerOff);
         }
+
         protected override byte[] GetReadLightingModePacket(LightingZone zone)
         {
             return new byte[] { 0x00, 0x12, 0x03, 0x00 };
@@ -132,8 +142,8 @@ namespace GHelper.Peripherals.Mouse.Models
             setting.RGBColor = Color.FromArgb(packet[offset + 2], packet[offset + 3], packet[offset + 4]);
 
             setting.AnimationDirection = SupportsAnimationDirection(setting.LightingMode)
-                 ? (AnimationDirection)packet[21]
-                 : AnimationDirection.Clockwise;
+                ? (AnimationDirection)packet[21]
+                : AnimationDirection.Clockwise;
 
             if (setting.AnimationDirection != AnimationDirection.Clockwise
                 && setting.AnimationDirection != AnimationDirection.CounterClockwise)
@@ -153,6 +163,7 @@ namespace GHelper.Peripherals.Mouse.Models
             {
                 setting.AnimationSpeed = AnimationSpeed.Medium;
             }
+
             return setting;
         }
 
@@ -162,6 +173,7 @@ namespace GHelper.Peripherals.Mouse.Models
             {
                 return;
             }
+
             //Mouse sends all lighting zones in one response
             //21: Direction
             //22: Random
@@ -183,7 +195,8 @@ namespace GHelper.Peripherals.Mouse.Models
                     continue;
                 }
 
-                Logger.WriteLine(GetDisplayName() + ": Read RGB Setting for Zone " + lz[i].ToString() + ": " + ls.ToString());
+                Logger.WriteLine(GetDisplayName() + ": Read RGB Setting for Zone " + lz[i].ToString() + ": " +
+                                 ls.ToString());
                 LightingSetting[i] = ls;
             }
         }

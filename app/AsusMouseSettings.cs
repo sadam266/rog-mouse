@@ -1,21 +1,23 @@
-﻿using GHelper.Peripherals.Mouse;
-using GHelper.UI;
+﻿using RogMouse.Helpers;
+using RogMouse.Peripherals.Mouse;
+using RogMouse.UI;
 
-namespace GHelper
+namespace RogMouse
 {
     public partial class AsusMouseSettings : RForm
     {
         private static Dictionary<LightingMode, string> lightingModeNames = new Dictionary<LightingMode, string>()
         {
-            { LightingMode.Static,Properties.Strings.AuraStatic},
-            { LightingMode.Breathing, Properties.Strings.AuraBreathe},
-            { LightingMode.ColorCycle, Properties.Strings.AuraColorCycle},
-            { LightingMode.Rainbow, Properties.Strings.AuraRainbow},
-            { LightingMode.React, Properties.Strings.AuraReact},
-            { LightingMode.Comet, Properties.Strings.AuraComet},
-            { LightingMode.BatteryState, Properties.Strings.AuraBatteryState},
-            { LightingMode.Off, Properties.Strings.MatrixOff},
+            { LightingMode.Static, Properties.Strings.AuraStatic },
+            { LightingMode.Breathing, Properties.Strings.AuraBreathe },
+            { LightingMode.ColorCycle, Properties.Strings.AuraColorCycle },
+            { LightingMode.Rainbow, Properties.Strings.AuraRainbow },
+            { LightingMode.React, Properties.Strings.AuraReact },
+            { LightingMode.Comet, Properties.Strings.AuraComet },
+            { LightingMode.BatteryState, Properties.Strings.AuraBatteryState },
+            { LightingMode.Off, Properties.Strings.MatrixOff },
         };
+
         private List<LightingMode> supportedLightingModes = new List<LightingMode>();
 
         private readonly AsusMouse mouse;
@@ -94,6 +96,7 @@ namespace GHelper
             buttonLightingColor.Click += ButtonLightingColor_Click;
             comboBoxLightingMode.DropDownClosed += ComboBoxLightingMode_DropDownClosed;
             sliderBrightness.MouseUp += SliderBrightness_MouseUp;
+            sliderBrightness.ValueChanged += SliderBrightness_ValueChanged;
             comboBoxAnimationSpeed.DropDownClosed += ComboBoxAnimationSpeed_DropDownClosed;
             comboBoxAnimationDirection.DropDownClosed += ComboBoxAnimationDirection_DropDownClosed;
             checkBoxRandomColor.CheckedChanged += CheckBoxRandomColor_CheckedChanged;
@@ -154,6 +157,7 @@ namespace GHelper
             {
                 return;
             }
+
             visibleZone = zone;
             InitLightingModes();
             VisusalizeLightingSettings();
@@ -197,12 +201,10 @@ namespace GHelper
             {
                 return;
             }
+
             if (!mouse.IsDeviceReady)
             {
-                this.Invoke(delegate
-                {
-                    Close();
-                });
+                this.Invoke(delegate { Close(); });
             }
         }
 
@@ -212,11 +214,8 @@ namespace GHelper
             {
                 return;
             }
-            this.Invoke(delegate
-            {
-                VisualizeBatteryState();
-            });
 
+            this.Invoke(delegate { VisualizeBatteryState(); });
         }
 
         private void ComboProfile_DropDownClosed(object? sender, EventArgs e)
@@ -311,6 +310,11 @@ namespace GHelper
             UpdateLightingSettings(ls, visibleZone);
         }
 
+        private void SliderBrightness_ValueChanged(object? sender, EventArgs e)
+        {
+            labelBrightnessValue.Text = sliderBrightness.Value.ToString() + "%";
+        }
+
         private void SliderBrightness_MouseUp(object? sender, MouseEventArgs e)
         {
             LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
@@ -327,7 +331,7 @@ namespace GHelper
             }
 
             var index = comboBoxLightingMode.SelectedIndex;
-            LightingMode lm = supportedLightingModes[(index >= 0 && index < supportedLightingModes.Count) ? index : 0 ];
+            LightingMode lm = supportedLightingModes[(index >= 0 && index < supportedLightingModes.Count) ? index : 0];
 
             LightingSetting? ls = mouse.LightingSettingForZone(visibleZone);
             if (ls.LightingMode == lm)
@@ -376,6 +380,7 @@ namespace GHelper
             {
                 return;
             }
+
             PowerOffSetting pos = (PowerOffSetting)obj;
 
 
@@ -431,6 +436,7 @@ namespace GHelper
             {
                 return;
             }
+
             AsusMouseDPI dpi = mouse.DpiSettings[mouse.DpiProfile - 1];
             dpi.DPI = (uint)sliderDPI.Value;
 
@@ -446,12 +452,9 @@ namespace GHelper
             {
                 return;
             }
-            //Mouse disconnected. Bye bye.
-            this.Invoke(delegate
-            {
-                this.Close();
-            });
 
+            //Mouse disconnected. Bye bye.
+            this.Invoke(delegate { this.Close(); });
         }
 
         private void RefreshMouseData()
@@ -521,7 +524,6 @@ namespace GHelper
                 {
                     comboBoxPollingRate.Items.Add(mouse.PollingRateDisplayString(pr));
                 }
-
             }
             else
             {
@@ -567,7 +569,8 @@ namespace GHelper
 
             if (mouse.HasLiftOffSetting())
             {
-                comboBoxLiftOffDistance.Items.AddRange(new string[] {
+                comboBoxLiftOffDistance.Items.AddRange(new string[]
+                {
                     Properties.Strings.Low,
                     Properties.Strings.High,
                 });
@@ -592,13 +595,14 @@ namespace GHelper
 
             if (mouse.HasAutoPowerOff())
             {
-                comboBoxAutoPowerOff.Items.AddRange(new string[]{
-                    " 1 "+ Properties.Strings.Minute,
-                    " 2 "+ Properties.Strings.Minutes,
-                    " 3 "+ Properties.Strings.Minutes,
-                    " 5 "+ Properties.Strings.Minutes,
-                    "10 "+ Properties.Strings.Minutes,
-                     Properties.Strings.Never,
+                comboBoxAutoPowerOff.Items.AddRange(new string[]
+                {
+                    " 1 " + Properties.Strings.Minute,
+                    " 2 " + Properties.Strings.Minutes,
+                    " 3 " + Properties.Strings.Minutes,
+                    " 5 " + Properties.Strings.Minutes,
+                    "10 " + Properties.Strings.Minutes,
+                    Properties.Strings.Never,
                 });
             }
 
@@ -625,8 +629,10 @@ namespace GHelper
                 if (mouse.SupportedLightingZones().Length > 1)
                 {
                     buttonLightingZoneLogo.Visible = mouse.SupportedLightingZones().Contains(LightingZone.Logo);
-                    buttonLightingZoneScroll.Visible = mouse.SupportedLightingZones().Contains(LightingZone.Scrollwheel);
-                    buttonLightingZoneUnderglow.Visible = mouse.SupportedLightingZones().Contains(LightingZone.Underglow);
+                    buttonLightingZoneScroll.Visible =
+                        mouse.SupportedLightingZones().Contains(LightingZone.Scrollwheel);
+                    buttonLightingZoneUnderglow.Visible =
+                        mouse.SupportedLightingZones().Contains(LightingZone.Underglow);
                     buttonLightingZoneDock.Visible = mouse.SupportedLightingZones().Contains(LightingZone.Dock);
                 }
                 else
@@ -641,12 +647,14 @@ namespace GHelper
 
                 InitLightingModes();
 
-                comboBoxAnimationDirection.Items.AddRange(new string[] {
+                comboBoxAnimationDirection.Items.AddRange(new string[]
+                {
                     Properties.Strings.AuraClockwise,
                     Properties.Strings.AuraCounterClockwise,
                 });
 
-                comboBoxAnimationSpeed.Items.AddRange(new string[] {
+                comboBoxAnimationSpeed.Items.AddRange(new string[]
+                {
                     Properties.Strings.AuraSlow,
                     Properties.Strings.AuraNormal,
                     Properties.Strings.AuraFast
@@ -701,6 +709,7 @@ namespace GHelper
                 {
                     return;
                 }
+
                 comboBoxPollingRate.SelectedIndex = idx;
             }
 
@@ -764,11 +773,13 @@ namespace GHelper
 
             if (mouse.Charging)
             {
-                pictureBoxBatteryState.BackgroundImage = ControlHelper.TintImage(Properties.Resources.icons8_ladende_batterie_48, foreMain);
+                pictureBoxBatteryState.BackgroundImage =
+                    ControlHelper.TintImage(Properties.Resources.icons8_ladende_batterie_48, foreMain);
             }
             else
             {
-                pictureBoxBatteryState.BackgroundImage = ControlHelper.TintImage(Properties.Resources.icons8_batterie_voll_geladen_48, foreMain);
+                pictureBoxBatteryState.BackgroundImage =
+                    ControlHelper.TintImage(Properties.Resources.icons8_batterie_voll_geladen_48, foreMain);
             }
         }
 
@@ -790,8 +801,10 @@ namespace GHelper
 
             buttonLightingZoneAll.BackColor = buttonLightingZoneAll.Secondary ? RForm.buttonSecond : RForm.buttonMain;
             buttonLightingZoneLogo.BackColor = buttonLightingZoneLogo.Secondary ? RForm.buttonSecond : RForm.buttonMain;
-            buttonLightingZoneScroll.BackColor = buttonLightingZoneScroll.Secondary ? RForm.buttonSecond : RForm.buttonMain;
-            buttonLightingZoneUnderglow.BackColor = buttonLightingZoneUnderglow.Secondary ? RForm.buttonSecond : RForm.buttonMain;
+            buttonLightingZoneScroll.BackColor =
+                buttonLightingZoneScroll.Secondary ? RForm.buttonSecond : RForm.buttonMain;
+            buttonLightingZoneUnderglow.BackColor =
+                buttonLightingZoneUnderglow.Secondary ? RForm.buttonSecond : RForm.buttonMain;
             buttonLightingZoneDock.BackColor = buttonLightingZoneDock.Secondary ? RForm.buttonSecond : RForm.buttonMain;
         }
 
@@ -854,11 +867,13 @@ namespace GHelper
                 {
                     continue;
                 }
+
                 if (mouse.HasDPIColors())
                 {
                     dpiButtons[i].Image = ControlHelper.TintImage(Properties.Resources.lighting_dot_24, dpi.Color);
                     dpiButtons[i].BorderColor = dpi.Color;
                 }
+
                 dpiButtons[i].Activated = (mouse.DpiProfile - 1) == i;
                 dpiButtons[i].Text = "DPI " + (i + 1) + "\n" + dpi.DPI;
             }
@@ -878,7 +893,8 @@ namespace GHelper
             try
             {
                 dpi = mouse.DpiSettings[mouse.DpiProfile - 1];
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger.WriteLine($"Wrong mouse DPI: {mouse.DpiProfile} {mouse.DpiSettings.Length} {ex.Message}");
                 return;
@@ -888,13 +904,13 @@ namespace GHelper
             {
                 return;
             }
+
             sliderDPI.Value = (int)dpi.DPI;
             pictureDPIColor.BackColor = dpi.Color;
         }
 
         private void AsusMouseSettings_Shown(object? sender, EventArgs e)
         {
-
             if (Height > Program.settingsForm.Height)
             {
                 Top = Program.settingsForm.Top + Program.settingsForm.Height - Height;
@@ -919,12 +935,12 @@ namespace GHelper
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
-            byte[] data = null;
+            byte[]? data = null;
 
             Thread t = new Thread(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+                ofd.Filter = "RogMouse Mouse Profile V1 (*.gmp1)|*.gmp1";
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -963,7 +979,7 @@ namespace GHelper
             Thread t = new Thread(() =>
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "G-Helper Mouse Profile V1 (*.gmp1)|*.gmp1";
+                sfd.Filter = "RogMouse Mouse Profile V1 (*.gmp1)|*.gmp1";
 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {

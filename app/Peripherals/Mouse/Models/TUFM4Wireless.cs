@@ -1,4 +1,4 @@
-﻿namespace GHelper.Peripherals.Mouse.Models
+﻿namespace RogMouse.Peripherals.Mouse.Models
 {
     //P306_Wireless
     public class TUFM4Wirelss : AsusMouse

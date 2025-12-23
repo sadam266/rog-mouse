@@ -1,4 +1,6 @@
-﻿namespace GHelper.Peripherals.Mouse.Models
+﻿using RogMouse.Helpers;
+
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //P513
     public class StrixImpactIIWireless : AsusMouse

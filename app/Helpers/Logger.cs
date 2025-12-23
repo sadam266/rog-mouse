@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
+﻿namespace RogMouse.Helpers;
+
+using System.Diagnostics;
 
 public static class Logger
 {
-    public static string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\GHelper";
+    public static string appPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\RogMouse";
     public static string logFile = appPath + "\\log.txt";
 
     public static void WriteLine(string logMessage)
@@ -18,11 +20,12 @@ public static class Logger
                 w.Close();
             }
         }
-        catch { }
+        catch
+        {
+            // ignored
+        }
 
         if (new Random().Next(100) == 1) Cleanup();
-
-
     }
 
     public static void Cleanup()
@@ -33,7 +36,9 @@ public static class Logger
             int skip = Math.Max(0, file.Count() - 2000);
             File.WriteAllLines(logFile, file.Skip(skip).ToArray());
         }
-        catch { }
+        catch
+        {
+            // ignored
+        }
     }
-
 }

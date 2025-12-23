@@ -1,13 +1,14 @@
 ﻿using System.Diagnostics;
 using System.Security.Principal;
 
-namespace GHelper.Helpers
+namespace RogMouse.Helpers
 {
     public static class ProcessHelper
     {
         private static long lastAdmin;
 
         private static bool? _isSystem;
+
         public static bool IsRunningAsSystem()
         {
             if (_isSystem.HasValue)
@@ -18,7 +19,8 @@ namespace GHelper.Helpers
                 if (identity == null)
                     _isSystem = false;
                 else
-                    _isSystem = string.Equals(identity.Name, @"NT AUTHORITY\SYSTEM", StringComparison.OrdinalIgnoreCase);
+                    _isSystem = string.Equals(identity.Name, @"NT AUTHORITY\SYSTEM",
+                        StringComparison.OrdinalIgnoreCase);
             }
 
             return _isSystem.Value;
@@ -29,22 +31,22 @@ namespace GHelper.Helpers
             Process currentProcess = Process.GetCurrentProcess();
             Process[] processes = Process.GetProcessesByName(currentProcess.ProcessName);
 
-            if (processes.Length > 1)
-            {
-                foreach (Process process in processes)
-                    if (process.Id != currentProcess.Id)
-                        try
-                        {
-                            process.Kill();
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.WriteLine(ex.ToString());
-                            MessageBox.Show(Properties.Strings.AppAlreadyRunningText, Properties.Strings.AppAlreadyRunning, MessageBoxButtons.OK);
-                            Application.Exit();
-                            return;
-                        }
-            }
+            if (processes.Length <= 1) return;
+
+            foreach (Process process in processes)
+                if (process.Id != currentProcess.Id)
+                    try
+                    {
+                        process.Kill();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.WriteLine(ex.ToString());
+                        MessageBox.Show(Properties.Strings.AppAlreadyRunningText,
+                            Properties.Strings.AppAlreadyRunning, MessageBoxButtons.OK);
+                        Application.Exit();
+                        return;
+                    }
         }
 
         public static bool IsUserAdministrator()
@@ -56,28 +58,26 @@ namespace GHelper.Helpers
 
         public static void RunAsAdmin(string? param = null, bool force = false)
         {
-
             if (Math.Abs(DateTimeOffset.Now.ToUnixTimeMilliseconds() - lastAdmin) < 2000) return;
             lastAdmin = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
             // Check if the current user is an administrator
-            if (!IsUserAdministrator() || force)
+            if (IsUserAdministrator() && !force) return;
+
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.UseShellExecute = true;
+            startInfo.WorkingDirectory = Environment.CurrentDirectory;
+            startInfo.FileName = Application.ExecutablePath;
+            startInfo.Arguments = param;
+            startInfo.Verb = "runas";
+            try
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.UseShellExecute = true;
-                startInfo.WorkingDirectory = Environment.CurrentDirectory;
-                startInfo.FileName = Application.ExecutablePath;
-                startInfo.Arguments = param;
-                startInfo.Verb = "runas";
-                try
-                {
-                    Process.Start(startInfo);
-                    Application.Exit();
-                }
-                catch (Exception ex)
-                {
-                    Logger.WriteLine(ex.Message);
-                }
+                Process.Start(startInfo);
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLine(ex.Message);
             }
         }
 
@@ -115,7 +115,8 @@ namespace GHelper.Helpers
         {
             try
             {
-                string script = $"Get-Service -Name \"{serviceName}\" | Stop-Service -Force -PassThru | Set-Service -StartupType {disable}";
+                string script =
+                    $"Get-Service -Name \"{serviceName}\" | Stop-Service -Force -PassThru | Set-Service -StartupType {disable}";
                 Logger.WriteLine(script);
                 RunCMD("powershell", script);
             }
@@ -129,7 +130,8 @@ namespace GHelper.Helpers
         {
             try
             {
-                string script = $"Set-Service -Name \"{serviceName}\" -Status running" + (automatic? " -StartupType Automatic":"");
+                string script = $"Set-Service -Name \"{serviceName}\" -Status running" +
+                                (automatic ? " -StartupType Automatic" : "");
                 Logger.WriteLine(script);
                 RunCMD("powershell", script);
             }
@@ -166,15 +168,13 @@ namespace GHelper.Helpers
         {
             try
             {
-                using (Process p = Process.GetCurrentProcess())
-                    p.PriorityClass = priorityClass;
+                using Process p = Process.GetCurrentProcess();
+                p.PriorityClass = priorityClass;
             }
             catch (Exception ex)
             {
                 Logger.WriteLine(ex.ToString());
             }
         }
-
-
     }
 }

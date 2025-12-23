@@ -1,4 +1,4 @@
-﻿namespace GHelper.UI
+﻿namespace RogMouse.UI
 {
     public class RCheckBox : CheckBox
     {

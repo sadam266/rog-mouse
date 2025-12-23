@@ -1,5 +1,8 @@
-﻿
-namespace GHelper.Peripherals.Mouse.Models
+﻿using static RogMouse.Peripherals.Mouse.LightingMode;
+using static RogMouse.Peripherals.Mouse.LightingZone;
+using static RogMouse.Peripherals.Mouse.PollingRate;
+
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //SPATHA_WIRELESS
     public class SpathaX : AsusMouse
@@ -17,14 +20,12 @@ namespace GHelper.Peripherals.Mouse.Models
             return "ROG Spatha X (Wireless)";
         }
 
-        public override PollingRate[] SupportedPollingrates()
-        {
-            return new PollingRate[] {
-                PollingRate.PR250Hz,
-                PollingRate.PR500Hz,
-                PollingRate.PR1000Hz
-            };
-        }
+        public override PollingRate[] SupportedPollingrates() =>
+        [
+            PR250Hz,
+            PR500Hz,
+            PR1000Hz
+        ];
 
         public override bool HasAngleSnapping()
         {
@@ -66,10 +67,40 @@ namespace GHelper.Peripherals.Mouse.Models
             return true;
         }
 
-        public override LightingZone[] SupportedLightingZones()
-        {
-            return new LightingZone[] { LightingZone.Logo, LightingZone.Scrollwheel, LightingZone.Underglow };
-        }
+        public override LightingZone[] SupportedLightingZones() =>
+        [
+            Logo,
+            Scrollwheel,
+            Underglow,
+            Dock
+        ];
+
+        public override bool IsLightingModeSupported(LightingMode lightingMode) =>
+            lightingMode is Off
+                or Static
+                or Breathing
+                or ColorCycle
+                or React
+                or Rainbow
+                or Comet
+                or BatteryState;
+
+        public override bool IsLightingModeSupportedForZone(LightingMode lm, LightingZone lz) =>
+            lz switch
+            {
+                All =>
+                    true,
+                Scrollwheel or Logo or Underglow =>
+                    lm is Static
+                        or Breathing
+                        or ColorCycle
+                        or React,
+                Dock =>
+                    lm is Static
+                        or Breathing
+                        or BatteryState,
+                _ => IsLightingModeSupported(lm)
+            };
 
         public override bool HasAutoPowerOff()
         {
@@ -88,7 +119,7 @@ namespace GHelper.Peripherals.Mouse.Models
 
         public override bool HasDPIColors()
         {
-            return true;
+            return false;
         }
     }
 

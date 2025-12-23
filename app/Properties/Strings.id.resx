@@ -157,7 +157,7 @@
     <value>Aplikasi sudah berjalan</value>
   </data>
   <data name="AppAlreadyRunningText" xml:space="preserve">
-    <value>G-Helper sudah berjalan. Periksa system tray untuk menemukan ikonnya.</value>
+    <value>RogMouse sudah berjalan. Periksa system tray untuk menemukan ikonnya.</value>
   </data>
   <data name="Apply" xml:space="preserve">
     <value>Terapkan</value>
@@ -617,8 +617,8 @@ Apakah Anda masih ingin melanjutkan?</value>
   <data name="OneZone" xml:space="preserve">
     <value>One Zone</value>
   </data>
-  <data name="OpenGHelper" xml:space="preserve">
-    <value>Buka Jendela G-Helper</value>
+  <data name="OpenRogMouse" xml:space="preserve">
+    <value>Buka Jendela RogMouse</value>
   </data>
   <data name="Optimized" xml:space="preserve">
     <value>Dioptimalkan</value>
@@ -669,7 +669,7 @@ Apakah Anda masih ingin melanjutkan?</value>
     <value>Reset</value>
   </data>
   <data name="RestartGPU" xml:space="preserve">
-    <value>Ada yang menggunakan dGPU dan mencegah mode Eco. Biarkan G-Helper mencoba memulai ulang dGPU di pengelola perangkat? (Silakan lanjutkan dengan risiko Anda sendiri)</value>
+    <value>Ada yang menggunakan dGPU dan mencegah mode Eco. Biarkan RogMouse mencoba memulai ulang dGPU di pengelola perangkat? (Silakan lanjutkan dengan risiko Anda sendiri)</value>
   </data>
   <data name="RPM" xml:space="preserve">
     <value>RPM</value>

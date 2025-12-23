@@ -1,4 +1,4 @@
-﻿namespace GHelper.Peripherals.Mouse.Models
+﻿namespace RogMouse.Peripherals.Mouse.Models
 {
     //P711
     public class GladiusIIIAimpoint : AsusMouse

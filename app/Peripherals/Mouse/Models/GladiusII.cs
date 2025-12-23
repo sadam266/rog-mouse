@@ -1,4 +1,6 @@
-﻿namespace GHelper.Peripherals.Mouse.Models
+﻿using RogMouse.Helpers;
+
+namespace RogMouse.Peripherals.Mouse.Models
 {
     //P504
     public class GladiusIIOrigin : AsusMouse
@@ -362,7 +364,7 @@
             };
         }
 
-        protected LightingSetting? ParseLightingSetting(byte[] packet, LightingZone zone)
+        protected new LightingSetting? ParseLightingSetting(byte[] packet, LightingZone zone)
         {
             if (packet[1] != 0x12 || packet[2] != 0x03)
             {
@@ -376,7 +378,7 @@
 
             setting.LightingMode = LightingModeForIndex(packet[offset + 0]);
             setting.Brightness = packet[offset + 1];
-            //Offset 2 is a bool that says whether dual color RGB is in use. Unsupported for now by GHelper
+            //Offset 2 is a bool that says whether dual color RGB is in use. Unsupported for now by RogMouse
 
             setting.RGBColor = Color.FromArgb(packet[offset + 3], packet[offset + 4], packet[offset + 5]);
 

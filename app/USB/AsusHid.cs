@@ -1,7 +1,8 @@
-﻿using HidSharp;
+﻿using RogMouse.Helpers;
+using HidSharp;
 using HidSharp.Reports;
 
-namespace GHelper.USB;
+namespace RogMouse.USB;
 public static class AsusHid
 {
     public const int ASUS_ID = 0x0b05;
@@ -54,7 +55,7 @@ public static class AsusHid
             {
                 isValid = device.GetReportDescriptor().TryGetReport(ReportType.Feature, reportId, out _);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Logger.WriteLine($"Error getting report descriptor for device {device.ProductID.ToString("X")}: {ex.Message}");
             }
@@ -68,18 +69,6 @@ public static class AsusHid
         {
             var devices = FindDevices(reportId);
             if (devices is null) return null;
-
-            if (AppConfig.IsZ13())
-            {
-                var z13 = devices.Where(device => device.ProductID == 0x1a30).FirstOrDefault();
-                if (z13 is not null) return z13.Open();
-            }
-
-            if (AppConfig.IsS17())
-            {
-                var s17 = devices.Where(device => device.ProductID == 0x18c6).FirstOrDefault();
-                if (s17 is not null) return s17.Open();
-            }
 
             foreach (var device in devices)
                 Logger.WriteLine($"Input available: {device.DevicePath} {device.ProductID.ToString("X")} {device.GetMaxFeatureReportLength()}");
@@ -96,17 +85,15 @@ public static class AsusHid
 
     public static void WriteInput(byte[] data, string? log = "USB")
     {
-        foreach (var device in FindDevices(INPUT_ID))
+        foreach (var device in FindDevices(INPUT_ID)!)
         {
             try
             {
-                using (var stream = device.Open())
-                {
-                    var payload = new byte[device.GetMaxFeatureReportLength()];
-                    Array.Copy(data, payload, data.Length);
-                    stream.SetFeature(payload);
-                    if (log is not null) Logger.WriteLine($"{log} {device.ProductID.ToString("X")}|{device.GetMaxFeatureReportLength()}: {BitConverter.ToString(data)}");
-                }
+                using var stream = device.Open();
+                var payload = new byte[device.GetMaxFeatureReportLength()];
+                Array.Copy(data, payload, data.Length);
+                stream.SetFeature(payload);
+                if (log is not null) Logger.WriteLine($"{log} {device.ProductID.ToString("X")}|{device.GetMaxFeatureReportLength()}: {BitConverter.ToString(data)}");
             }
             catch (Exception ex)
             {
